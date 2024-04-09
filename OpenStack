@@ -1,0 +1,116 @@
+# openrc.sh
+export OS_PROJECT_DOMAIN_NAME=domain_name.com
+export OS_USER_DOMAIN_NAME=domain_name.com
+export OS_PROJECT_NAME=project_name
+export OS_USERNAME=username
+export OS_PASSWORD=
+export OS_AUTH_URL=openstack_url
+export OS_IDENTITY_API_VERSION=3
+export OS_IMAGE_API_VERSION=2
+
+# To allow login into Openstack site
+source ./openrc.sh
+
+# OpenStack quota management - https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/quota.html
+
+# get clusterpool creation related namespaces
+oc get ns
+
+# get flavors list
+openstack flavor list --sort-column RAM --sort-descending --fit-width
+
+# get openstack resources used by a alls flavors
+openstack flavor list -c Name -c RAM -c Disk -c VCPUs  --sort-column RAM --sort-descending --fit-width 
+
+# find specific flavor details (ci.standard.xl)
+openstack flavor list --sort-column RAM --sort-descending --fit-width | grep 'ci.standard.xl\|ID '
+
+# get openstack resources used by a specific flavor (Ex: ci.standard.large)
+openstack flavor list -c Name -c RAM -c Disk -c VCPUs --fit-width | grep 'ci.standard.xl\|Name '   
+
+ # get flavor list sorted by memory into csv format
+openstack flavor list -f csv --quote none | tail -n +2 | awk -F ',' '{ print $2 "," $3/1024 " GB," $4 "," $6 }' | sort -t',' -k3 -nr   
+ 
+ # get network (pool) names filtered for _cci__ and shared type network names,  sorted by 'Total IPs'
+openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|shared\|IPs'   
+
+# get volume (pvc) list
+openstack volume list --long    
+
+# print also columns names
+openstack volume list --long | grep 'ID' | tr '\n' '\r'  
+
+# IP creation
+openstack floating ip create network_name --description "description text"  --tag "reserve"
+
+# delete the floating IP (use it's ID)
+ openstack floating ip delete IP_ID
+
+# List Network names IP summary
+openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|IPs' 
+
+# list IP addresses
+openstack floating ip list
+
+# List unassociated floating IPs
+openstack floating ip list --long | grep None
+
+
+
+# get namespaces sorted by name
+oc get ns --sort-by='{.metadata.name}'
+
+# Get cd (clusterdeployments) from the namespace
+oc -n namespace_name get cd
+
+# describing clusterdeployment
+oc -n namespace_name describe cd clusterdeployment_name
+
+# get all namespaces (ns) created per the newly created clusterpool (cp_name)
+oc get ns --sort-by='{.metadata.name}' | grep -i cp_name
+
+# Create the clusterpool named cp_name in ns_name 
+kubectl -n ns_name create -f cp_config.yaml
+
+# get clusterpool list from our namespace
+kubectl -n ns_name get cp
+
+# Describe a clusterpool when there is an issue
+oc -n ns_name describe cp cp_name
+
+# get all current namespaces
+kubectl get ns
+
+# get the pods of the clusterpod installation
+kubectl -n ns_name get pods
+
+# get the clusterpool (cp) installation of the last cp installation pod (sno-vcmst-15-kq8cx-provision--1-v9thc)
+kubectl -n ns_name logs pod_name -f -c hive | tee logfile.log
+
+# get clusterpools info
+oc get cp
+
+# openstack server list
+openstack server list --sort-column Name --sort-descending --fit-width
+
+# get current clusterclaim's
+oc -n ns_name get clusterclaim
+
+# Apply a claim
+kubectl -n ns_name apply -f claim.yaml
+
+# get current clusterclaim's
+oc -n ns_name get clusterclaim
+
+# once we don't need anymore the cluster, we delete the clusterclaim
+oc -n ns_name delete clusterclaim cc_name
+
+# get ClusterDeploymentCustomization 
+oc get ClusterDeploymentCustomization 
+
+# delete ClusterDeploymentCustomization
+oc delete ClusterDeploymentCustomization cdc_name
+
+
+
+
