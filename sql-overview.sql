@@ -66,7 +66,8 @@ INNER JOIN table2 t2 ON t1.column2 = t2.column2;
 EXPLAIN SELECT column1, column2
 FROM table
 WHERE condition;
-Avoid Redundant Data: Normalize your database to eliminate redundant data and ensure data integrity.
+
+-- Avoid Redundant Data: Normalize your database to eliminate redundant data and ensure data integrity.
 
 
 
