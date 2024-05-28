@@ -180,7 +180,7 @@ Here's a brief overview of how to use git stash:
 # ===
 
 # GIT rebase
-export GITHUB_TOKEN="mytoken"
+export GITHUB_TOKEN=""
 
 git checkout main && git pull upstream main && git push origin main
 git checkout my_local_branch
