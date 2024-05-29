@@ -1,3 +1,16 @@
+-- Tables Definition
+Table A
+id	name
+1	Alice
+2	Bob
+3	Carol
+
+Table B
+id	age
+1	25
+2	30
+4	35
+
 -- Types of Joins
 
 -- Inner Join: Returns records with matching values in both tables. It combines rows from two tables based on a common column.
@@ -5,25 +18,83 @@ SELECT columns
 FROM table1
 INNER JOIN table2 ON table1.common_column = table2.common_column;
 
+SELECT A.id, A.name, B.age
+FROM A
+INNER JOIN B ON A.id = B.id;
+
+Result
+id	name	age
+1	Alice	25
+2	Bob	    30
+
+
 -- Left (Outer) Join: Returns all records from the left table and matched records from the right table. Unmatched records from the right table will be NULL.
 SELECT columns
 FROM table1
 LEFT JOIN table2 ON table1.common_column = table2.common_column;
+
+SELECT A.id, A.name, B.age
+FROM A
+LEFT JOIN B ON A.id = B.id;
+
+Result
+id	name	age
+1	Alice	25
+2	Bob	    30
+3	Carol	NULL
+
 
 -- Right (Outer) Join: Returns all records from the right table and matched records from the left table. Unmatched records from the left table will be NULL.
 SELECT columns
 FROM table1
 RIGHT JOIN table2 ON table1.common_column = table2.common_column;
 
+SELECT A.id, A.name, B.age
+FROM A
+RIGHT JOIN B ON A.id = B.id;
+
+Result
+id	    name	age
+1	    Alice	25
+2	    Bob	    30
+NULL	NULL	35
+
 -- Full (Outer) Join: Returns all records when there is a match in either left or right table.
 SELECT columns
 FROM table1
 FULL OUTER JOIN table2 ON table1.common_column = table2.common_column;
 
+SELECT A.id, A.name, B.age
+FROM A
+FULL OUTER JOIN B ON A.id = B.id;
+
+Result
+id	    name	age
+1	    Alice	25
+2	    Bob	    30
+3	    Carol	NULL
+NULL	NULL	35
+
 -- Cross Join: Returns the Cartesian product of the two tables (all possible combinations).
 SELECT columns
 FROM table1
 CROSS JOIN table2;
+
+SELECT A.id AS a_id, A.name, B.id AS b_id, B.age
+FROM A
+CROSS JOIN B;
+
+Result
+a_id	name	b_id	age
+1	    Alice	1	    25
+1	    Alice	2	    30
+1	    Alice	4	    35
+2	    Bob	    1	    25
+2	    Bob	    2	    30
+2	    Bob	    4	    35
+3	    Carol	1	    25
+3	    Carol	2	    30
+3	    Carol	4	    35
 
 -- Best Practices
 -- Understand the Data: Know your data schema, relationships, and indexes. This helps in writing efficient queries.
@@ -68,6 +139,7 @@ FROM table
 WHERE condition;
 
 -- Avoid Redundant Data: Normalize your database to eliminate redundant data and ensure data integrity.
+
 
 
 
