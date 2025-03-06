@@ -368,6 +368,50 @@ git diff localBranch remoteRepo/remoteBranch
 git fetch upstream main
 git rev-list --count HEAD..upstream/main
 
+1. Remove selenium-drivers from the Last Commit 
+## If you just committed but haven't pushed yet, use:
+   git reset --soft HEAD~1
+   % This undoes the last commit but keeps the changes staged. Now, remove the folder from staging:
+   git reset -- Selenium/selenium-drivers/
+
+   % Then, re-commit only the desired files:
+   git commit -m "Updated commit without selenium-drivers"
+
+   % Finally, push the commit:
+   git push origin main
+
+2. Remove selenium-drivers After Pushing (Force Push Required)
+   If you've already pushed the commit to GitHub, you need to rewrite history:
+
+   % Step 1: Remove the folder from Git
+   git rm -r --cached Selenium/selenium-drivers/
+
+   % Step 2: Add it to .gitignore to prevent tracking
+   echo "Selenium/selenium-drivers/" >> .gitignore
+   git add .gitignore
+
+   % Step 3: Commit the changes
+   git commit -m "Removed selenium-drivers from repo and added to .gitignore"
+
+   % Step 4: Force push to overwrite history (if necessary)
+   git push origin main --force
+
+   **Force pushing (--force) rewrites history, so only do this if you’re sure! If working in a team, let others know before force-pushing.**
+
+3. Verify That selenium-drivers is No Longer Tracked
+   % Run:
+   git ls-files | grep selenium-drivers 
+   or for windows CMD
+   git ls-files | findstr selenium-drivers
+
+
+   % If nothing is listed, the folder is no longer tracked.
+
+Summary
+✅ If not pushed, use git reset --soft HEAD~1
+✅ If already pushed, use git rm -r --cached + force push
+✅ Add .gitignore to prevent tracking in the future
+
 
 # GITHUB
 
