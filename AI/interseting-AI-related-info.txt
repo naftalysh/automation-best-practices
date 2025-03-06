@@ -1,0 +1,172 @@
+https://github.com/coleam00/bolt.new-any-llm - This repository allows you to prompt, run, edit, and deploy full-stack web applications using various large language models (LLMs) of your choice. 
+
+oTToDev is directly related to the repository https://github.com/coleam00/bolt.new-any-llm. This repository, created by Cole Medin, serves as the foundation for oTToDev, 
+an enhanced version of the original Bolt.new project.
+
+Key Features of oTToDev:
+1. Multiple LLM Integration: oTToDev allows users to select from various large language models (LLMs) for each prompt, 
+   including OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, and Groq models. 
+
+2. In-Browser Development Environment: Leveraging StackBlitz’s WebContainers, oTToDev enables full-stack web development directly in the browser, eliminating the need for local setup. 
+
+3. Community Contributions: The project is actively maintained, with contributions adding features like OpenRouter and Gemini integrations, 
+   automatic generation of Ollama models, and the ability to publish projects directly to GitHub.
+
+
+# ============================
+Getting Started with oTToDev:
+# ============================
+
+Step-by-Step Installation Guide - 
+# =============================
+1. Install Git and Node.js
+    - Git: Download and install Git from git-scm.com.
+    - Node.js: Download and install Node.js from nodejs.org.
+
+2. Verify Installation
+    - Open a terminal (or Command Prompt on Windows) and verify the installations:
+
+      git --version
+      node --version
+      npm --version
+
+3. Clone the Repository:
+    - Clone the repository using the following command:
+      git clone https://github.com/coleam00/bolt.new-any-llm.git
+      cd bolt.new-any-llm
+
+4. Install PNPM (if not already installed)
+    - PNPM is recommended for managing dependencies. Install it globally if you haven't already:
+      npm install -g pnpm
+
+5. Install Dependencies
+    - Install the project dependencies using PNPM:
+      pnpm install
+
+6. Configure Environment Variables
+    - Rename .env.example to .env.local and add your LLM API keys:
+      cp .env.example .env.local
+
+    - Open .env.local and add your API keys:
+        GROQ_API_KEY=XXX
+        OPENAI_API_KEY=XXX
+        ANTHROPIC_API_KEY=XXX
+        VITE_LOG_LEVEL=debug    
+
+        For instance:
+        GROQ_API_KEY=your_groq_api_key
+        OPENAI_API_KEY=your_openai_api_key
+        ANTHROPIC_API_KEY=your_anthropic_api_key
+
+        Note: Only set the keys for the LLMs you intend to use.  
+
+7. Run the Application
+    - Start the development server:
+      pnpm run dev
+
+    - After running the application, we get the below message indicating where is bolt.new local web server address:
+      Local:   http://localhost:5173/
+
+8. Run with Docker (Optional)
+    - Build Docker Image:
+        - For development:
+          npm run dockerbuild
+
+        - For production:
+          npm run dockerbuild:prod
+    
+    - Run Docker Container:
+        - For development:
+          docker-compose --profile development up
+
+        - For production:
+          docker-compose --profile production up
+
+9. Super Important Note on Running Ollama Models
+    - Create a custom Ollama model with a larger context window:
+        - Create a Modelfile:
+          echo "FROM [Ollama model ID such as qwen2.5-coder:7b]" > Modelfile
+          echo "PARAMETER num_ctx 32768" >> Modelfile
+        
+        - Create the new model:
+          ollama create -f Modelfile [your new model ID, can be whatever you want (example: qwen2.5-coder-extra-ctx:7b)]
+
+10. Adding New LLMs
+    - Edit app/utils/constants.ts and add new models to the MODEL_LIST array.
+
+11. Available Scripts
+    - Development Server:
+      pnpm run dev
+
+    - Build Project:
+      pnpm run build
+
+    - Run Built Application:
+      pnpm run start
+
+    - Preview Production Build:
+      pnpm run preview
+
+    - Run Tests:
+      pnpm test
+
+    - Type Checking:
+      pnpm run typecheck
+
+    - Generate Types:
+      pnpm run typegen
+
+    - Deploy to Cloudflare Pages:
+      pnpm run deploy
+
+
+Troubleshooting Tips
+1. Dependency Issues:
+
+    - If you encounter dependency issues, try deleting node_modules and package-lock.json (or pnpm-lock.yaml if using PNPM) and reinstalling:
+      rm -rf node_modules package-lock.json
+      pnpm install
+2. Environment Variable Issues:
+    - Ensure .env.local is correctly named and placed in the root directory.
+    - Verify that the environment variables are correctly set and not committed to version control.
+
+3. Docker Issues:
+    - Ensure Docker is running and has sufficient resources.
+    - Check Docker logs for any errors during build or run.
+
+4. Ollama Model Issues:
+    - Ensure Ollama is installed and the custom model is correctly created.
+    - Verify the model ID and parameters in the Modelfile.
+
+By following these steps, you should be able to set up and run the "bolt.new-any-llm" development IDE successfully. If you encounter any specific issues, refer to the README or reach out for further assistance.
+
+
+- Install Dependencies: Navigate to the project directory and install the necessary dependencies using pnpm:
+  pnpm install
+
+- Configure Environment Variables: Rename .env.example to .env.local and add your LLM API keys. 
+  For instance:
+
+  GROQ_API_KEY=your_groq_api_key
+  OPENAI_API_KEY=your_openai_api_key
+  ANTHROPIC_API_KEY=your_anthropic_api_key
+
+  Note: Only set the keys for the LLMs you intend to use.
+
+- Run the Application: Start the development server:
+  pnpm run dev
+
+- terminate the process - 
+  - Using Keyboard Shortcut: While the server is running in your terminal, press Ctrl + C. This sends an interrupt signal to the process, terminating it gracefully. 
+
+  - Using Process Management Tools: If the server doesn't stop with Ctrl + C, you can identify the process ID (PID) and terminate it manually:
+    - List all running Node.js processes:
+      ps aux | grep node
+
+      Identify the PID of the process you want to stop.
+    - Terminate the process:
+      kill -9 <PID>
+
+- Install Node.js and npm:
+  sudo apt update
+  sudo apt install nodejs npm -y

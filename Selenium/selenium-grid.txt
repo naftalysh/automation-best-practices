@@ -1,0 +1,47 @@
+# Step 0: Start podman machine
+podman machine init
+podman machine start
+
+# Step 1: Pull the Docker Images
+  First, pull the necessary Docker images for the Selenium Grid hub and nodes.
+
+podman pull selenium/hub
+podman pull selenium/node-chrome
+podman pull selenium/node-firefox
+
+# Step 2: Create a Podman Network
+  Create a network to ensure the containers can communicate with each other.
+podman network create selenium-grid
+
+
+# Step 3: Start the Selenium Grid Hub
+  Run the Selenium Grid hub using Docker:
+
+podman run -d --name selenium-hub --network selenium-grid -p 4444:4444 selenium/hub
+
+( This command will start a Selenium Grid hub and map port 4444 on your localhost to port 4444 in the Docker container )
+
+# Step 4: Start the Selenium Grid Nodes
+  Start one or more nodes and link them to the hub. You can start nodes with different browsers (Chrome, Firefox) as needed.
+
+## For 3 Chrome nodes:
+podman run -d --name node-chrome-1 --network selenium-grid --network-alias hub selenium/node-chrome
+podman run -d --name node-chrome-2 --network selenium-grid --network-alias hub selenium/node-chrome
+podman run -d --name node-chrome-3 --network selenium-grid --network-alias hub selenium/node-chrome
+
+
+## For Firefox node:
+podman run -d --name node-firefox-1 --network selenium-grid --network-alias hub selenium/node-firefox
+podman run -d --name node-firefox-2 --network selenium-grid --network-alias hub selenium/node-firefox
+podman run -d --name node-firefox-3 --network selenium-grid --network-alias hub selenium/node-firefox
+
+
+
+# Step 5: Verify the Setup
+Open a browser and navigate to http://localhost:4444/grid/console. You should see the Selenium Grid console with the connected nodes listed.
+
+
+Running Your Test
+
+
+

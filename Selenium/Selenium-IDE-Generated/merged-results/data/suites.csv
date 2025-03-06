@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2631","test_myFirstTestCase","","Tue Sep 03 11:44:40 IDT 2024","passed","Tue Sep 03 11:44:43 IDT 2024","TestMyFirstTestCase","test_myFirstTestCase-with-Allure-reporting","",""

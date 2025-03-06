@@ -1,0 +1,101 @@
+Section,Number,Title,Description,Windows Shortcut,Mac Shortcut
+Framework,1,CSI-FBI,"Context, Specific, Instruction, +Format, Blueprint, Identity",,
+Framework,2,AIDA,"Attention, Interest, Desire, Action",,
+Framework,3,CARC,"Context, Action, Result, Example",,
+Framework,4,TAB,"Task, Action, Goal",,
+Framework,5,RTF,"Role, Task, Format",,
+Framework,6,PAS,"Problem, Agitate, Solution",,
+Framework,7,RISEN,"Role, Instructions, Steps, End Goal, Narrowing",,
+Framework,8,SNAKE (to get the best Python code),"Spotify (file type). Notebook (Colab. Jupyter). Action. Key-data. Structure",,
+Framework,9,STAR,"Situation, Task, Action, Result",,
+Framework,10,CRISPE,"Capacity, Rule, Insight, Statement, Personality, Experiment",,
+Framework,11,APE,"Action, Purpose, Expectation",,
+Framework,12,BAB,"Before, After, Bridge",,
+Framework,13,SWOT,"Strengths, Weaknesses, Opportunities, Threats",,
+Framework,14,RICE,"Reach, Impact, Confidence, Effort",,
+Framework,15,OKR,"Objectives and Key Results",,
+Framework,16,PESTLE,"Political, Economic, Social, Technological, Legal, Environmental",,
+Framework,17,MOSCOW,"Must-have, Should-have, Could-have, Won't-have",,
+Framework,18,ABCDE,"Assess, Brainstorm, Create, Develop, Execute",,
+Framework,19,DMAIC,"Define, Measure, Analyze, Improve, Control",,
+Framework,20,CARR,"Challenge, Action, Results, Reflection",,
+Framework,21,PPP,"Progress, Plans, Problems",,
+Framework,22,SMART,"Specific, Measurable, Achievable, Relevant, Time-bound",,
+Framework,23,4P's,"Product, Price, Place, Promotion",,
+Framework,24,RODES,"Role, Objective, Details, Examples, Sense Check",,
+Framework,25,IRDA,"Instructions, Recursion, Benchmark, Additional Guidelines",,
+Shortcuts,26,Open new chat,,Ctrl + Shift + B,Cmd + Shift + B
+Shortcuts,27,Place cursor in chat input,,Ctrl + Shift + T,Cmd + Shift + T
+Shortcuts,28,Copy last code block,,Ctrl + Shift + ,,Cmd + Shift + ,
+Shortcuts,29,Copy last response,,Ctrl + Shift + C,Cmd + Shift + C
+Shortcuts,30,Set custom instructions,,Ctrl + Shift + O,Cmd + Shift + O
+Shortcuts,31,Toggle sidebar,,Ctrl + /,Cmd + /
+Shortcuts,32,Delete chat,,Ctrl + Shift + Backspace,Cmd + Shift + Backspace
+Shortcuts,33,Show all shortcuts,,Ctrl + 1,Cmd + 1
+Shortcuts,34,Undo Action,,Ctrl + 2,Cmd + 2
+Shortcuts,35,Redo Action,,Ctrl + -,Cmd + -
+Shortcuts,36,Zoom in,,Ctrl + =,Cmd + =
+Shortcuts,37,Zoom Out,,Ctrl + -,Cmd + -
+Shortcuts,38,Reset Zoom,,,
+Shortcuts,39,Quit Application,,Alt + F4,Cmd + Q
+Shortcuts,40,Submit Input,,Enter,Enter
+Shortcuts,41,Add a Line Break,,Shift + Enter,Shift + Enter
+Shortcuts,42,Cycle through interface elements,,Tab,Tab
+Shortcuts,43,Browser-Specific Shortcut: Close Current Tab,,Ctrl + W,Cmd + W
+Shortcuts,44,Browser-Specific Shortcut: Search Within Tab,,Ctrl + F,Cmd + F
+Shortcuts,45,Browser-Specific Shortcut: Reload ChatGPT,,Ctrl + R,Cmd + R
+Shortcuts,46,Browser-Specific Shortcut: Mark Tab/Chat as Favorite,,Ctrl + L,Cmd + L
+Shortcuts,47,Keyboard Navigation in ChatGPT: Scroll to Top,,Ctrl + Up,Cmd + Up
+Shortcuts,48,Keyboard Navigation in ChatGPT: Scroll to Bottom,,Page Down,Cmd + Down Arrow
+Shortcuts,49,In Text Editors w/ ChatGPT Plugins: Invoke ChatGPT Command,,Ctrl + Shift + P,Cmd + Shift + P
+Shortcuts,50,In Text Editors w/ ChatGPT Plugins: Autocomplete Prompt,,Ctrl + Tab or Ctrl + Space,Tab or Ctrl + Space
+Data,51,Convert Text to a Table,"Provide data in plain text and ask, ""Turn this into a table format""",,
+Data,52,Summarize Data,"Paste a dataset and ask, ""Summarize this data into key points""",,
+Data,53,Generate Excel Formulas,"Describe what you want to calculate, which data you have and ask for the formula",,
+Data,54,Generate a CSV File Template,"Request, ""Create a CSV format for tracking sales data""",,
+Data,55,Extract Data Patterns,"Ask, ""Extract specific patterns from this data""",,
+Data,56,Create an Excel Table,"List the headers and the type of data you want inside. Then say ""Generate file""",,
+Data,57,How to Create a Pivot Table,"Ask, ""How would you structure a Pivot Table to analyze revenue by region?""",,
+Data,58,Generate Conditional Formatting Rules,"Example: ""Give me a rule to highlight all cells with a value greater than $1,000""",,
+Data,59,Automate Tasks with VBA,"Example: ""Write a VBA script to combine all tabs in one tab""",,
+Data,60,Suggest Graphs or Charts,"Ask, ""What type of chart should I use to visualize this data?""",,
+Data,61,Turn Data into Insights,"Provide raw data and ask, ""Summarize this into a key insights report""",,
+Data,62,Generate Slide Content,"Ask for bullet points, ""Summarize this content into 3 slides for a presentation""",,
+Data,63,Create a Financial Dashboard Outline,"Request, ""Guide me in building a sales dashboard by region""",,
+Data,64,Create a Gantt Chart Template,"ChatGPT can outline tasks, durations, and dependencies in a structured format",,
+Data,65,Create Monthly Reports,"Example: ""Draft a monthly performance report with the following data""",,
+Data,66,Export Data to Excel,"ChatGPT can generate text structured as Excel-importable (e.g., CSV) data",,
+Data,67,Detect Data Anomalies,"Provide a dataset and ask, ""Identify any outliers or inconsistencies in this data""",,
+Data,68,Generate Data Cleaning Steps,"Ask, ""What steps should I take to clean this dataset before analysis?""",,
+Data,69,Create Interactive Data Visualizations,"Request, ""Suggest interactive visualization tools for this dataset""",,
+Data,70,Compare Data Trends Over Time,"Provide time-series data and ask, ""Identify key trends and changes over time""",,
+Data,71,Recommend the Best Chart for Data,"Ask, ""What type of chart best represents this dataset?""",,
+Data,72,Generate Forecasting Models,"Ask, ""What forecasting methods can I use for this data, and how do I apply them?""",,
+Data,73,Transform Data for Better Analysis,"Request, ""Convert this unstructured data into an analysis-friendly format""",,
+Data,74,Create Automated Data Reports,"Ask, ""Generate a summary report from this dataset with key insights and visuals""",,
+Data,75,Translate Data Descriptions,"Example: ""Turn this description into SQL queries or database schema""",,
+Advanced,76,Obtain Image ID for similar images,"Utilize image processing by referencing replication of formats, be specific about the id.",,
+Advanced,77,How to prompt ai,"Check the mini course at Al Finance Club",,
+Advanced,78,Create a GPT,"Explore custom GPTs or tailor responses for your specific needs.",,
+Advanced,79,Chain Prompts for Complex Tasks,"Break down tasks into smaller chunks and connect them with sequential queries.",,
+Advanced,80,Use Role-Playing,"Ask ChatGPT to act ""as"" a specific expert (e.g., CFO, developer, data scientist).",,
+Advanced,81,Ask for Counterarguments,"Challenge outputs by requesting opposing views or alternative solutions.",,
+Advanced,82,Refine with Iteration,"Continuously refine outputs by asking for clarifications or adjustments.",,
+Advanced,83,Automate Tasks with APIs,"Integrate ChatGPT's outputs into workflows using tools like Zapier or APIs.",,
+Advanced,84,Request Visual Suggestions,"Ask for layouts, table designs, or graphical ideas to enhance presentations.",,
+Advanced,85,Generate Frameworks,"Example: ""Provide a step-by-step framework for budgeting processes""",,
+Advanced,86,Analyze Sentiment,"Paste content and ask ChatGPT to determine its tone or sentiment.",,
+Advanced,87,Generate Markdown,"Example: ""Format this text in Markdown for a README file""",,
+Advanced,88,Create Powerpoint via ChatGPT,"Ask ChatGPT to create a PowerPoint (you can even say 4x3 or 4x4 layout).",,
+Advanced,89,Explore GPTs,"GPT Marketplace - search here before creating your own.",,
+Advanced,90,Simulate Conversations,"Practice interviews, sales pitches, or client interactions.",,
+Advanced,91,Generate JSON or XML Outputs,"Example: ""Convert this data into JSON for a database""",,
+Advanced,92,Canvas Functionality in ChatGPT,"Canvas opens in a separate window, allowing you and ChatGPT to collaborate on a project.",,
+Advanced,93,Custom Instructions,"Personalize responses by setting preferences for tone, or what it should know about you.",,
+Advanced,94,Projects Functionality in ChatGPT,"Organize files and chats for personal use and manage work across multiple conversations.",,
+Advanced,95,Memory Setting in ChatGPT,"Save key details for ongoing conversations for more context-aware responses",,
+Advanced,96,Tasks Functionality in ChatGPT,"Schedule tasks: Ex: Prepare monthly financial statements (Scheduled: 5th of each month)",,
+Advanced,97,Socratic Prompting,"Using open-ended, probing questions to push the Al toward deeper thinking",,
+Advanced,98,Agent Prompting,"Assigning roles or tasks, defining roles clearly for specialized outputs",,
+Advanced,99,Meta-Cognition,"Instructing the Al to evaluate its responses for accuracy or coherence",,
+Advanced,100,Team Prompting,"Collaborating with multiple Al models or personas to solve a problem.",,

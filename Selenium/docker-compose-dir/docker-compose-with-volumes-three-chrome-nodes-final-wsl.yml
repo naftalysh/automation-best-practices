@@ -1,0 +1,221 @@
+version: '3'
+# Define reusable values with YAML Anchors
+x-variables:
+  base_dir: &base_dir '/mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes'
+
+services:
+  # The Selenium Hub service
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    networks:
+      - selenium-grid
+
+  # Chrome Node 1
+  node-chrome-1:
+    image: selenium/node-chrome
+    container_name: node-chrome-1
+    environment:
+      # Setting up environment variables for event bus communication
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - selenium-grid
+    volumes:
+      # Volume for storing screenshots
+      - chrome-screenshots-1:/screenshots
+      # Volume for storing logs
+      - chrome-logs-1:/var/log/selenium
+
+  # Chrome Node 2
+  node-chrome-2:
+    image: selenium/node-chrome
+    container_name: node-chrome-2
+    environment:
+      # Setting up environment variables for event bus communication
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - selenium-grid
+    volumes:
+      # Volume for storing screenshots
+      - chrome-screenshots-2:/screenshots
+      # Volume for storing logs
+      - chrome-logs-2:/var/log/selenium
+
+  # Chrome Node 3
+  node-chrome-3:
+    image: selenium/node-chrome
+    container_name: node-chrome-3
+    environment:
+      # Setting up environment variables for event bus communication
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - selenium-grid
+    volumes:
+      # Volume for storing screenshots
+      - chrome-screenshots-3:/screenshots
+      # Volume for storing logs
+      - chrome-logs-3:/var/log/selenium
+
+  # Firefox Node 1
+  node-firefox:
+    image: selenium/node-firefox
+    container_name: node-firefox
+    environment:
+      # Setting up environment variables for event bus communication
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - selenium-grid
+    volumes:
+      # Volume for storing screenshots
+      - firefox-screenshots:/screenshots
+      # Volume for storing logs
+      - firefox-logs:/var/log/selenium
+
+networks:
+  selenium-grid:
+
+volumes:
+  chrome-screenshots-1:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-screenshots-1
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-screenshots-1
+
+  chrome-logs-1:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-logs-1
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-logs-1
+
+  chrome-screenshots-2:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-screenshots-2
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-screenshots-2
+
+  chrome-logs-2:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-logs-2
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-logs-2
+
+  chrome-screenshots-3:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-screenshots-3
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-screenshots-3
+
+  chrome-logs-3:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/chrome-logs-3
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-logs-3
+
+  firefox-screenshots:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/firefox-screenshots
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/firefox-screenshots
+
+  firefox-logs:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # absolute path
+      # device: /path/to/local/firefox-logs
+      # relative path
+      device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/firefox-logs
+
+# -----------------------------------------------------------------------------
+# Bootstrap and Strip Guide:
+#
+# To Bootstrap the Selenium Grid Infrastructure:
+# 1. Navigate to the directory containing this docker-compose.yml file.
+# 2. Run the following command to start the Selenium Grid hub and nodes:
+#    $ docker-compose up -d
+#    This command starts all services defined in this file in detached mode.
+#    The Selenium Hub will be available at http://localhost:4444/grid/console.
+#
+# 3. Verify that the nodes are connected to the hub by visiting the hub URL.
+#    You should see the Chrome and Firefox nodes listed under the hub.
+#
+# To Strip (Tear Down) the Selenium Grid Infrastructure:
+# 1. Run the following command to stop and remove the containers, networks,
+#    and any other resources defined in this docker-compose.yml file:
+#    $ docker-compose down
+#
+# 2. If you need to remove volumes used by the containers (for logs/screenshots),
+#    run the command with the --volumes flag:
+#    $ docker-compose down --volumes
+#
+# 3. The --volumes option will delete all the data stored in the volumes, 
+#    so use this option only if you do not need to retain the logs or screenshots.
+
+# To use specific yml file, use the below format:
+# docker-compose -f custom-docker-compose.yml up -d
+
+
+# Install podman-compose for wsl or linux
+#   Identify Your Linux Distribution:
+#   cat /etc/os-release
+
+#   Ex: For Fedora:
+#   sudo dnf install podman python3-pip
+#   pip3 install podman-compose
+# 
+# Workarounds for podman-compose who doesn't know how to relate to relative volume paths:
+# 1. Pre-create Directories:
+#    Manually create the directories before running podman-compose. This ensures that Podman has the correct directories available for mounting.
+#    ```sh
+#    mkdir -p chrome-logs-1 chrome-screenshots-1 chrome-logs-2 chrome-screenshots-2 chrome-logs-3 chrome-screenshots-3 firefox-logs firefox-screenshots
+#    ```
+# 2. Use Absolute Paths:
+#    Use absolute paths in the device option instead of relative paths. This avoids path resolution issues and ensures that podman-compose correctly finds the directories.
+#
+# Mitigate volumes issues ---
+# ===========================
+# Restart Podman and Rebuild the Containers: Sometimes, Podman may cache certain states that prevent proper volume mounting. Restart Podman and rebuild the containers:
+# 
+# podman-compose down
+# podman-compose up -d --build
+# 
+# -----------------------------------------------------------------------------

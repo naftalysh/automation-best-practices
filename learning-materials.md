@@ -2,6 +2,7 @@
    a. This one is new and is absolutely nice: https://www.youtube.com/watch?v=s_o8dwzRlu4
    b. official materials: https://kubernetes.io/docs/tutorials/kubernetes-basics/
    c. Another new one: https://www.guru99.com/kubernetes-tutorial.html
+   d. https://gitlab.com/chmouel/chmouzies - 
 
 
 2.Operators(something very important for us):

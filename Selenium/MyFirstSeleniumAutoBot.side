@@ -1,0 +1,167 @@
+{
+  "id": "790cd8f0-c9f2-4e56-b231-ad6ccadba1fa",
+  "version": "2.0",
+  "name": "MyFirstSeleniumAutoBot",
+  "url": "https://rpachallenge.com",
+  "tests": [{
+    "id": "5ef8b18f-48b0-4685-a1c8-0264e08457ca",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "4bfaebaf-a779-4f7b-b7c2-bd62be56cbf7",
+    "name": "MyFirstTestCase",
+    "commands": [{
+      "id": "83cedf4d-67cc-467e-99c0-2eadb46561fe",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8fd856d1-45d8-467d-a3d2-09c2e4c0cc0d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1d73bda5-be73-4d13-979d-aa37adb3d6f6",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Role in Company'])[1]/following::input",
+      "targets": [
+        ["id=Ra8t2", "id"],
+        ["name=Ra8t2", "name"],
+        ["css=#Ra8t2", "css:finder"],
+        ["xpath=//input[@id='Ra8t2']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b90e8d6-4a34-4961-aea4-acba0f80c323",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Role in Company'])[1]/following::input",
+      "targets": [
+        ["id=Ra8t2", "id"],
+        ["name=Ra8t2", "name"],
+        ["css=#Ra8t2", "css:finder"],
+        ["xpath=//input[@id='Ra8t2']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Senior QA Engineer"
+    }, {
+      "id": "423882dd-1c7f-48cb-a1eb-920fafd54f97",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='First Name'])[1]/following::input",
+      "targets": [
+        ["id=2ADrD", "id"],
+        ["name=2ADrD", "name"],
+        ["css=#\\32 ADrD", "css:finder"],
+        ["xpath=//input[@id='2ADrD']", "xpath:attributes"],
+        ["xpath=//div[2]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12fc80d8-f56c-4f39-bc36-ad6fe8511711",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='First Name'])[1]/following::input",
+      "targets": [
+        ["id=2ADrD", "id"],
+        ["name=2ADrD", "name"],
+        ["css=#\\32 ADrD", "css:finder"],
+        ["xpath=//input[@id='2ADrD']", "xpath:attributes"],
+        ["xpath=//div[2]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "Naftaly"
+    }, {
+      "id": "3d0da9b2-10eb-4c9f-96e5-2093f757251a",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Address'])[1]/following::input",
+      "targets": [
+        ["id=dQmhB", "id"],
+        ["name=dQmhB", "name"],
+        ["css=#dQmhB", "css:finder"],
+        ["xpath=//input[@id='dQmhB']", "xpath:attributes"],
+        ["xpath=//div[3]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "1 first Street, City One, IL"
+    }, {
+      "id": "d402c572-01e3-4f97-a72f-029321b63dcb",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Phone Number'])[1]/following::input",
+      "targets": [
+        ["id=UMl9a", "id"],
+        ["name=UMl9a", "name"],
+        ["css=#UMl9a", "css:finder"],
+        ["xpath=//input[@id='UMl9a']", "xpath:attributes"],
+        ["xpath=//div[4]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "03-12345678"
+    }, {
+      "id": "05fa848c-48a8-4737-ae51-38af8f90a531",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Last Name'])[1]/following::input",
+      "targets": [
+        ["id=855Rc", "id"],
+        ["name=855Rc", "name"],
+        ["css=#\\38 55Rc", "css:finder"],
+        ["xpath=//input[@id='855Rc']", "xpath:attributes"],
+        ["xpath=//div[5]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "Shprai"
+    }, {
+      "id": "7ba2edf6-5da7-4829-9b43-f2cd53d2d1b8",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Company Name'])[1]/following::input",
+      "targets": [
+        ["id=TBZ8i", "id"],
+        ["name=TBZ8i", "name"],
+        ["css=#TBZ8i", "css:finder"],
+        ["xpath=//input[@id='TBZ8i']", "xpath:attributes"],
+        ["xpath=//div[6]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "NOTL"
+    }, {
+      "id": "c5728b87-92f0-4f46-b2ce-5a0885822ea6",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/following::input",
+      "targets": [
+        ["id=9iB1c", "id"],
+        ["name=9iB1c", "name"],
+        ["css=#\\39iB1c", "css:finder"],
+        ["xpath=//input[@id='9iB1c']", "xpath:attributes"],
+        ["xpath=//div[7]/rpa1-field/div/input", "xpath:position"]
+      ],
+      "value": "test1@gmail.com"
+    }, {
+      "id": "011c1d1c-ab58-4c16-b08b-ac86a3a01dab",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(2)",
+      "targets": [
+        ["css=.btn:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Submit']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "08f1e58b-4482-4826-a997-d033f3028410",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["5ef8b18f-48b0-4685-a1c8-0264e08457ca"]
+  }],
+  "urls": ["https://rpachallenge.com/"],
+  "plugins": []
+}

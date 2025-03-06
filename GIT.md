@@ -202,6 +202,15 @@ If defined upstream without credentials, we can do it below:
 git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/upstream_orgname/reponame.git  
 
 
+Ex:   git remote add upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git  
+      git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git  
+      git remote set-url origin https://naftalysh:GITHUB_TOKEN@github.com/naftalysh/soc-simulation-project.git  
+
+      git remote add upstream https://naftalysh:$GITHUB_TOKEN@coleam00/bolt.new-any-llm.git
+      git remote set-url upstream https://naftalysh:$GITHUB_TOKEN@coleam00/bolt.new-any-llm.git
+      git remote set-url origin https://naftalysh:$GITHUB_TOKEN@github.com/naftalysh/bolt.new-any-llm.git
+
+          
 # if main branch is called master then we use "master" else "main"
 # Rebase 
 git checkout master && git pull upstream master && git push origin master
@@ -418,3 +427,67 @@ Git will then combine the three latest commits into one.
 Finally, you have to force push the last commit to the repository: git push origin +HEAD.
 
 ##
+
+
+## install gh utility on wsl
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+sudo apt install gh
+
+#
+# Searching for my PR in my e2e-tests repo
+C:\Users\nafta>gh auth login
+? Where do you use GitHub? GitHub.com
+? What is your preferred protocol for Git operations on this host? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 3114-49C6
+Press Enter to open https://github.com/login/device in your browser...
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as naftalysh
+
+
+# List PRs authored by naftalysh
+gh pr list --author naftalysh --repo konflux-ci/e2e-tests --state closed
+
+# List PRs assigned to naftalysh
+gh pr list --assignee naftalysh --repo konflux-ci/e2e-tests --state closed
+
+
+gh pr list --author naftalysh --repo konflux-ci/e2e-tests --state closed
+
+-->
+#1075  feat(KONFLUX-2084): refactor-load-test-not-to-conflict-on-entity-names                      naftalysh:KONFLUX-2084/refactor-load-test-not-to-conflict-on-entity-names                  about 8 months ago
+#1033  fix(KONFLUX-870): KONFLUX-870-Expose-accurate-resources-metrics                             naftalysh:KONFLUX-870/Expose-accurate-resources-metrics                                    about 10 months ago
+#1032  fix(KONFLUX-1090): KONFLUX-1090-Update-offline-token-secrets-in-GitHub                      naftalysh:Fix-KONFLUX-1090/Update-offline-token-secrets-in-GitHub                          about 10 months ago
+#990   fix(RHTAP-1897): Refactor-userJourneyThread-method                                          naftalysh:RHTAP-1897/Refactor-userJourneyThread-method-New-PR                              about 10 months ago
+#970   fix(RHTAP-1897): Refactor-userJourneyThread-method                                          naftalysh:RHTAP-1897/Refactor-userJourneyThread-method                                     about 11 months ago
+#947   fix(RHTAP-1991): Daily-CI-test-does-not-produce-JSON-file                                   naftalysh:RHTAP-1991/Daily-CI-test-does-not-produce-JSON-file                              about 11 months ago
+#923   fix(RHTAP-1892): time-skew-between-the-testing-machine-and-the-cluster                      naftalysh:RHTAP-1892/Fix-time-skew-between-the-testing-machine-and-the-cluster             about 1 year ago
+#913   feat(RHTAP-1926): Document-how-to-upload-offline-tokens-to-GitHub-sec…                      naftalysh:RHTAP-1926/Document-how-to-upload-offline-tokens-to-GitHub-secrets               about 1 year ago
+#911   feat(RHTAP-1923): Update-offline-token-secrets-in-GitHub                                    naftalysh:RHTAP-1923/Update-offline-token-secrets-in-GitHub                                about 1 year ago
+#905   fix(RHTAP-1913): Fix-high-error-rate-in-CI                                                  naftalysh:RHTAP-1913/Fix-high-error-rate-in-CI                                             about 1 year ago
+#859   feat(RHTAP-1726): Fix-GitHub-action-against-Stage - Update monitoring configuration adj...  naftalysh:RHTAP-1726/Fix-GitHub-action-against-Stage-new                                   about 1 year ago
+#848   feat(RHTAP-1726): Fix-GitHub-action-against-Stage                                           naftalysh:RHTAP-1726/Fix-GitHub-action-against-Stage                                       about 1 year ago
+#839   feat(RHTAP-1532): Track-integration-test-scenario-resource-creation-time                    naftalysh:RHTAP-1532/Also-track-integration-test-scenario-resource-creation-time           about 1 year ago
+#776   test(e2e-tests-pr): pr to tests e2e-tests repo                                              naftalysh:test                                                                             about 1 year ago
+#718   feat(RHTAP-1338): Add-random-prefix-to-all-resource-names                                   naftalysh:RHTAP-1338/Add-random-prefix-to-all-resource-names                               about 1 year ago
+#715   feat(RHTAP-1336): Collect-monitoring-data-from-the-OCP-Prometheus                           naftalysh:RHTAP-1336/Collect-monitoring-data-from-the-OCP-Prometheus                       about 1 year ago
+#700   feat(RHTAP-1337): Properly cleanup in stage                                                 naftalysh:RHTAP-1337/properly-cleanup-in-stage                                             about 1 year ago
+#661   feat(RHTAP-1018): load test measure how long the app test took                              naftalysh:RHTAP-1018/Load-test-measure-how-long-the-app-test-took                          about 1 year ago
+#631   feat(RHTAP-878): load test should also measure app deployment time                          naftalysh:RHTAP-878/Load-test-should-also-measure-app-deployment-time                      about 1 year ago
+#504   feat(RHTAP-868): use-different-component-repos                                              naftalysh:RHTAP-868/use-different-component-repos                                          about 1 year ago
+#494   feat(RHTAP-869): collect-pod-logs                                                           naftalysh:RHTAP-869/collect-pod-logs                                                       about 1 year ago
+#457   feat(RHTAP-623): load test to generate json file with all the results                       naftalysh:RHTAP-623/loadtest-to-generate-allresults-jsonfile                               about 1 year ago
+#404   feat: Stone 831/collect pod logs                                                            naftalysh:STONE-831/collect-pod-logs                                                       about 1 year ago
+#393   feat(STONE-768): integrate mvp-demo ginkgo test suit within godog                           naftalysh:STONE-768/Integrate-mvp-demo-ginkgo-testsuit                                     about 1 year ago
+#259   test: Added timings support                                                                 naftalysh:HACBS-1142/test-specific-timeouts                                                about 1 year ago
+#234   test: Hacbs 1142/test specific timeouts                                                     naftalysh:HACBS-1142/test-specific-timeouts                                                about 2 years ago
+#203   test: HACBS-1132-Based-on-the-e2e-test-happy-path-Add-releasePlan-and-ReleasePlanAdmiss...  naftalysh:HACBS-1132/Based-on-the-e2e-test-happy-path-Add-releasePlan-and-ReleasePlanA...  about 2 years ago
+#200   test: Hacbs 1130/create and delete namespaces in the new deployment of pre kcp              naftalysh:HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP         about 2 years ago
+#199   test: Hacbs 1132/based on the e2e test happy path add release plan and release plan adm...  naftalysh:HACBS-1132/Based-on-the-e2e-test-happy-path-Add-releasePlan-and-ReleasePlanA...  about 2 years ago
+#195   test: HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP              naftalysh:HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP         about 2 years ago

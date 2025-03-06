@@ -1078,3 +1078,62 @@ sudo dnf update --exclude=google-chrome-stable
 https://github.com/search?q=repo%3Atest-org%2Ftest-repo++from%3A+test-user&type=pullrequests&p=4
 
 
+
+## Install openWebUI on WSL
+```bash
+git clone https://github.com/open-webui/open-webui.git
+cd open-webui
+```bash
+
+ **Install Open WebUI**:
+Open your terminal and run the following command to install Open WebUI:
+
+```bash
+pip install open-webui
+```
+
+2. **Running Open WebUI**:
+   After installation, you can start Open WebUI by executing:
+
+```bash
+open-webui serve
+```
+
+# This will start the Open WebUI server, which you can access at [http://localhost:8080](http://localhost:8080)
+
+
+# port already used error handling:
+1. ERROR:    [Errno 98] error while attempting to bind on address ('0.0.0.0', 8080): address already in used
+2. Option 1 - Find which process using that port and kill it
+   Step 1: Find which process using that port - sudo lsof -i :8080
+   Step 2: Stop or Kill the Process - sudo kill <PID>
+
+3. Option 2 - Step 3: Start Open WebUI on a Different Port
+   Step 1: Look for an available port not used in the command: sudo ss -tuln
+           Or Find the Next Available Port Automatically: Use Python to find an available port dynamically:
+           python3 -c 'import socket; s = socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()'
+
+   Step 2: Choose an available port (ex: )
+   open-webui serve --port 4031
+
+4. Direct Open webUI to use ollama proxy at port 3002
+
+   Option 1. Redirect Open WebUI API Calls via Proxy (exists at port 3002):
+      export HTTP_PROXY=http://localhost:3002
+      export HTTPS_PROXY=http://localhost:3002
+
+      And then bottstrap open webUI
+
+   Option 2: Modify System Proxy Behavior
+      Set up a system-wide proxy: Modify /etc/environment (requires sudo): 
+      sudo nano /etc/environment
+
+      Add the following lines:
+      HTTP_PROXY="http://localhost:3002"
+      HTTPS_PROXY="http://localhost:3002"
+
+      And then bottstrap open webUI
+
+
+
+

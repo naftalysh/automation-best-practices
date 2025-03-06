@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Open WebUI",
+        "type": "shell",
+        "command": "open-webui",  // Replace this with the actual command to start Open WebUI
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": [],
+        "detail": "Starts Open WebUI"
+      },
+      {
+        "label": "Run Ollama Script",
+        "type": "shell",
+        "command": "python",  // Replace with your Python command or script name
+        "args": [
+          "your_script.py"  // Replace with your script name
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": [],
+        "detail": "Runs a Python script using Ollama models"
+      }
+    ]
+  }
+  

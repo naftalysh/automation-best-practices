@@ -1,0 +1,4 @@
+Q1: What is GIL?
+Q2: differenct between generator and iterator?
+Q3: What is a predicate?
+
