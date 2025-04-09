@@ -1,0 +1,173 @@
+name: Advanced Features
+
+on:
+  workflow_dispatch:
+    inputs:
+      feature:
+        description: 'Feature to demonstrate'
+        required: true
+        default: 'matrix'
+        type: choice
+        options:
+          - matrix
+          - caching
+          - reusable-workflow
+          - composite-action
+          - environment-deployment
+
+jobs:
+  matrix_build:
+    name: Matrix Build Demo
+    if: github.event.inputs.feature == 'matrix'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [14.x, 16.x, 18.x]
+        mongodb-version: [4.4, 5.0]
+        exclude:
+          # Exclude some combinations to optimize build time
+          - os: windows-latest
+            mongodb-version: 5.0
+          - os: macos-latest
+            node-version: 14.x
+      fail-fast: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: Start MongoDB ${{ matrix.mongodb-version }}
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Report matrix build status
+        run: |
+          echo "Build completed on ${{ matrix.os }} with Node.js ${{ matrix.node-version }} and MongoDB ${{ matrix.mongodb-version }}"
+
+  dependency_caching:
+    name: Dependency Caching Demo
+    if: github.event.inputs.feature == 'caching'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      
+      - name: Report cache status
+        run: |
+          if [ "${{ steps.npm-cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit! Using cached dependencies."
+          else
+            echo "Cache miss! Installed fresh dependencies."
+          fi
+      
+      - name: Run tests with cached dependencies
+        run: npm test
+
+  reusable_workflow_caller:
+    name: Reusable Workflow Demo
+    if: github.event.inputs.feature == 'reusable-workflow'
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      node-version: '16'
+      run-tests: true
+    secrets:
+      test-secret: ${{ secrets.TEST_SECRET || 'demo-secret' }}
+
+  composite_action_demo:
+    name: Composite Action Demo
+    if: github.event.inputs.feature == 'composite-action'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup and test API
+        uses: ./.github/actions/setup-and-test
+        with:
+          node-version: '16'
+          mongodb-version: '4.4'
+      
+      - name: Report composite action result
+        run: echo "Composite action completed successfully!"
+
+  environment_deployment:
+    name: Environment Deployment Demo
+    if: github.event.inputs.feature == 'environment-deployment'
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ matrix.environment }}
+      url: ${{ steps.deploy.outputs.deployment-url }}
+    strategy:
+      matrix:
+        environment: [development, staging, production]
+      fail-fast: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup environment-specific config
+        run: |
+          echo "Setting up ${{ matrix.environment }} environment"
+          echo "PORT=3000" > .env
+          echo "NODE_ENV=${{ matrix.environment }}" >> .env
+          echo "MONGO_URI=mongodb://localhost:27017/example-api-${{ matrix.environment }}" >> .env
+          echo "JWT_SECRET=secret_for_${{ matrix.environment }}" >> .env
+          echo "JWT_EXPIRE=1d" >> .env
+      
+      - name: Deploy to environment
+        id: deploy
+        run: |
+          echo "Deploying to ${{ matrix.environment }} environment..."
+          # In a real scenario, this would deploy to the actual environment
+          echo "deployment-url=https://${{ matrix.environment }}.example-api.com" >> $GITHUB_OUTPUT
+          echo "Deployment completed!"
+      
+      - name: Wait for approval
+        if: matrix.environment == 'production'
+        run: |
+          echo "Production deployment requires manual approval."
+          echo "In a real scenario, this would pause for approval."
+          # This is where GitHub's environment protection rules would apply
+      
+      - name: Run post-deployment checks
+        run: |
+          echo "Running post-deployment checks for ${{ matrix.environment }}..."
+          echo "All checks passed!"

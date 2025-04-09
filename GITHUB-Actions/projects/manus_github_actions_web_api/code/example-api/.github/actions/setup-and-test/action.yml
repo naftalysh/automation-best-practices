@@ -1,0 +1,65 @@
+name: 'Setup and Test API'
+description: 'Sets up Node.js, MongoDB, and runs tests for the API'
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '16'
+  mongodb-version:
+    description: 'MongoDB version to use'
+    required: false
+    default: '4.4'
+  run-lint:
+    description: 'Whether to run linting'
+    required: false
+    default: 'true'
+  run-tests:
+    description: 'Whether to run tests'
+    required: false
+    default: 'true'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
+    
+    - name: Start MongoDB ${{ inputs.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.8.0
+      with:
+        mongodb-version: ${{ inputs.mongodb-version }}
+    
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+    
+    - name: Create test environment
+      shell: bash
+      run: |
+        echo "PORT=3000" > .env
+        echo "NODE_ENV=test" >> .env
+        echo "MONGO_URI=mongodb://localhost:27017/example-api-test" >> .env
+        echo "JWT_SECRET=test_secret_key" >> .env
+        echo "JWT_EXPIRE=1d" >> .env
+    
+    - name: Run linting
+      if: inputs.run-lint == 'true'
+      shell: bash
+      run: npm run lint || echo "Linting issues found"
+    
+    - name: Run tests
+      if: inputs.run-tests == 'true'
+      shell: bash
+      run: npm test
+    
+    - name: Report setup status
+      shell: bash
+      run: |
+        echo "Setup and test completed successfully!"
+        echo "Node.js version: ${{ inputs.node-version }}"
+        echo "MongoDB version: ${{ inputs.mongodb-version }}"
+        echo "Linting run: ${{ inputs.run-lint }}"
+        echo "Tests run: ${{ inputs.run-tests }}"

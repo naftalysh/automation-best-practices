@@ -1,0 +1,61 @@
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: false
+        type: string
+        default: '16'
+      run-tests:
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      test-secret:
+        required: true
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build application
+        run: |
+          echo "Building application with Node.js ${{ inputs.node-version }}"
+          # In a real scenario, this would run a build script
+          mkdir -p dist
+          cp -r src dist/
+          cp package.json dist/
+          echo "Build completed at $(date)" > dist/build.txt
+      
+      - name: Run tests
+        if: inputs.run-tests
+        run: npm test
+        env:
+          TEST_SECRET: ${{ secrets.test-secret }}
+      
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: reusable-build
+          path: dist/
+      
+      - name: Report build status
+        run: |
+          echo "Reusable workflow completed successfully!"
+          echo "Node.js version: ${{ inputs.node-version }}"
+          echo "Tests run: ${{ inputs.run-tests }}"

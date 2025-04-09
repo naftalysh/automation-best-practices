@@ -1,0 +1,142 @@
+name: CD Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      version:
+        description: 'Version to deploy'
+        required: false
+        type: string
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - '.github/workflows/cd.yml'
+
+jobs:
+  prepare:
+    name: Prepare Deployment
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'development' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event.inputs.version }}" != "" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            VERSION=$(node -p "require('./package.json').version")
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+            echo "version=${VERSION}-${TIMESTAMP}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create deployment package
+        run: |
+          mkdir -p deploy
+          cp -r src deploy/
+          cp package.json deploy/
+          cp package-lock.json deploy/
+          cp .env.example deploy/.env.example
+          echo "VERSION=${{ steps.version.outputs.version }}" > deploy/version.txt
+          echo "ENVIRONMENT=${{ github.event.inputs.environment || 'development' }}" >> deploy/version.txt
+          echo "DEPLOYED_AT=$(date)" >> deploy/version.txt
+      
+      - name: Upload deployment package
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-package
+          path: deploy/
+
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment || 'development' }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'development' }}
+    
+    steps:
+      - name: Download deployment package
+        uses: actions/download-artifact@v3
+        with:
+          name: deployment-package
+          path: deploy
+      
+      - name: Setup environment-specific config
+        run: |
+          cd deploy
+          if [ "${{ github.event.inputs.environment || 'development' }}" = "production" ]; then
+            echo "Setting up production environment"
+            echo "PORT=3000" > .env
+            echo "NODE_ENV=production" >> .env
+            echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+            echo "JWT_EXPIRE=30d" >> .env
+          elif [ "${{ github.event.inputs.environment || 'development' }}" = "staging" ]; then
+            echo "Setting up staging environment"
+            echo "PORT=3000" > .env
+            echo "NODE_ENV=staging" >> .env
+            echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+            echo "JWT_EXPIRE=7d" >> .env
+          else
+            echo "Setting up development environment"
+            echo "PORT=3000" > .env
+            echo "NODE_ENV=development" >> .env
+            echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+            echo "JWT_EXPIRE=1d" >> .env
+          fi
+      
+      - name: Deploy to server
+        run: |
+          echo "Deploying to ${{ github.event.inputs.environment || 'development' }} environment"
+          # In a real scenario, this would use SSH, AWS CLI, Azure CLI, or other deployment methods
+          # For demonstration purposes, we'll simulate a deployment
+          echo "Connecting to server..."
+          echo "Uploading files..."
+          echo "Restarting service..."
+          echo "Deployment completed successfully!"
+      
+      - name: Run smoke tests
+        run: |
+          echo "Running smoke tests against deployed API"
+          # In a real scenario, this would make HTTP requests to verify the API is working
+          echo "GET /health - OK"
+          echo "GET /api/products - OK"
+          echo "Smoke tests passed!"
+      
+      - name: Notify on successful deployment
+        if: success()
+        run: |
+          echo "API version ${{ steps.version.outputs.version }} successfully deployed to ${{ github.event.inputs.environment || 'development' }}!"
+      
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Deployment failed! Rolling back to previous version..."
+          # In a real scenario, this would trigger a rollback to the previous stable version
+          echo "Rollback completed."

@@ -1,0 +1,122 @@
+name: Cross-Repository Workflow
+
+on:
+  repository_dispatch:
+    types: [api-update, dependency-update]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'sync'
+        type: choice
+        options:
+          - sync
+          - notify
+          - trigger-client-build
+
+jobs:
+  process_external_event:
+    name: Process External Event
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Log event details
+        run: |
+          echo "Received external event:"
+          echo "Event type: ${{ github.event_name }}"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "Dispatch type: ${{ github.event.action }}"
+            echo "Sender: ${{ github.event.sender.login }}"
+            echo "Client payload: ${{ toJSON(github.event.client_payload) }}"
+          else
+            echo "Manual action: ${{ github.event.inputs.action }}"
+          fi
+      
+      - name: Determine action
+        id: action
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "action=${{ github.event.action }}" >> $GITHUB_OUTPUT
+          else
+            echo "action=${{ github.event.inputs.action }}" >> $GITHUB_OUTPUT
+          fi
+  
+  sync_repositories:
+    name: Sync with Related Repositories
+    needs: process_external_event
+    if: needs.process_external_event.outputs.action == 'api-update' || needs.process_external_event.outputs.action == 'sync'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Sync API schema
+        run: |
+          echo "Syncing API schema with related repositories..."
+          # In a real scenario, this would fetch and update API schemas from other repositories
+          echo "API schema synchronized successfully!"
+      
+      - name: Update documentation
+        run: |
+          echo "Updating documentation based on API changes..."
+          # In a real scenario, this would update documentation based on API changes
+          echo "Documentation updated successfully!"
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: sync API schema from related repositories" && git push)
+
+  notify_related_repositories:
+    name: Notify Related Repositories
+    needs: process_external_event
+    if: needs.process_external_event.outputs.action == 'dependency-update' || needs.process_external_event.outputs.action == 'notify'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Notify client repository
+        run: |
+          echo "Notifying client repository of API changes..."
+          # In a real scenario, this would trigger a repository_dispatch event in another repository
+          # curl -X POST \
+          #   -H "Authorization: token ${{ secrets.REPO_ACCESS_TOKEN }}" \
+          #   -H "Accept: application/vnd.github.v3+json" \
+          #   https://api.github.com/repos/owner/client-repo/dispatches \
+          #   -d '{"event_type":"api-updated","client_payload":{"ref":"${{ github.ref }}","sha":"${{ github.sha }}"}}'
+          echo "Client repository notified successfully!"
+      
+      - name: Notify documentation repository
+        run: |
+          echo "Notifying documentation repository of API changes..."
+          # In a real scenario, this would trigger a repository_dispatch event in another repository
+          # curl -X POST \
+          #   -H "Authorization: token ${{ secrets.REPO_ACCESS_TOKEN }}" \
+          #   -H "Accept: application/vnd.github.v3+json" \
+          #   https://api.github.com/repos/owner/docs-repo/dispatches \
+          #   -d '{"event_type":"api-updated","client_payload":{"ref":"${{ github.ref }}","sha":"${{ github.sha }}"}}'
+          echo "Documentation repository notified successfully!"
+
+  trigger_client_build:
+    name: Trigger Client Build
+    needs: process_external_event
+    if: needs.process_external_event.outputs.action == 'trigger-client-build'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Trigger client build workflow
+        run: |
+          echo "Triggering client build workflow..."
+          # In a real scenario, this would trigger a workflow in another repository
+          # curl -X POST \
+          #   -H "Authorization: token ${{ secrets.REPO_ACCESS_TOKEN }}" \
+          #   -H "Accept: application/vnd.github.v3+json" \
+          #   https://api.github.com/repos/owner/client-repo/actions/workflows/build.yml/dispatches \
+          #   -d '{"ref":"main","inputs":{"api_version":"${{ github.sha }}"}}'
+          echo "Client build workflow triggered successfully!"

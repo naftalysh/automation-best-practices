@@ -1,0 +1,130 @@
+name: Dependency Management
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Run weekly on Monday at midnight
+  workflow_dispatch:
+    inputs:
+      update-type:
+        description: 'Type of dependency update'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  check_dependencies:
+    name: Check for Dependency Updates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Check for outdated dependencies
+        id: outdated
+        run: |
+          echo "Checking for outdated dependencies..."
+          npm outdated --json > outdated.json
+          if [ -s outdated.json ]; then
+            echo "outdated=true" >> $GITHUB_OUTPUT
+            echo "Found outdated dependencies:"
+            cat outdated.json
+          else
+            echo "outdated=false" >> $GITHUB_OUTPUT
+            echo "All dependencies are up to date!"
+          fi
+      
+      - name: Check for security vulnerabilities
+        id: audit
+        run: |
+          echo "Checking for security vulnerabilities..."
+          npm audit --json > audit.json
+          if [ $(cat audit.json | jq '.vulnerabilities | length') -gt 0 ]; then
+            echo "vulnerable=true" >> $GITHUB_OUTPUT
+            echo "Found security vulnerabilities:"
+            npm audit
+          else
+            echo "vulnerable=false" >> $GITHUB_OUTPUT
+            echo "No security vulnerabilities found!"
+          fi
+      
+      - name: Upload dependency reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-reports
+          path: |
+            outdated.json
+            audit.json
+
+  update_dependencies:
+    name: Update Dependencies
+    needs: check_dependencies
+    runs-on: ubuntu-latest
+    if: needs.check_dependencies.outputs.outdated == 'true' || needs.check_dependencies.outputs.vulnerable == 'true'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Update dependencies
+        run: |
+          echo "Updating dependencies..."
+          UPDATE_TYPE="${{ github.event.inputs.update-type || 'minor' }}"
+          
+          if [ "$UPDATE_TYPE" = "patch" ]; then
+            echo "Updating patch versions only"
+            npm update
+          elif [ "$UPDATE_TYPE" = "minor" ]; then
+            echo "Updating minor versions"
+            npx npm-check-updates -u --target minor
+            npm install
+          else
+            echo "Updating all dependencies to latest versions"
+            npx npm-check-updates -u
+            npm install
+          fi
+      
+      - name: Run tests with updated dependencies
+        run: npm test
+      
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update dependencies"
+          title: "Update Dependencies"
+          body: |
+            This PR updates project dependencies.
+            
+            Update type: ${{ github.event.inputs.update-type || 'minor' }}
+            
+            Automated changes by [Dependency Management Workflow](https://github.com/${{ github.repository }}/actions/workflows/dependency-management.yml)
+          branch: dependency-updates
+          base: develop
+      
+      - name: Report dependency update status
+        run: |
+          echo "Dependency update completed!"
+          echo "A pull request has been created with the updates."
