@@ -535,3 +535,60 @@ gh pr list --author naftalysh --repo konflux-ci/e2e-tests --state closed
 #200   test: Hacbs 1130/create and delete namespaces in the new deployment of pre kcp              naftalysh:HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP         about 2 years ago
 #199   test: Hacbs 1132/based on the e2e test happy path add release plan and release plan adm...  naftalysh:HACBS-1132/Based-on-the-e2e-test-happy-path-Add-releasePlan-and-ReleasePlanA...  about 2 years ago
 #195   test: HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP              naftalysh:HACBS-1130/Create-and-Delete-namespaces-in-the-new-deployment-of-Pre-KCP         about 2 years ago
+
+
+###
+
+To have the same GitHub repository available in your **upstream organization** (in addition to your own fork and local copy), you can either **transfer** it or **duplicate** it to the organization, depending on what you want:
+
+---
+
+### **Option 1: Transfer Repository to Organization**  
+(You **move** the repository from your personal account to the organization)
+
+#### When to use:
+- You no longer need to own the repository under your personal account.
+- You want to maintain stars, issues, forks, etc.
+
+#### Steps:
+1. On GitHub, go to **your forked repository**.
+2. Click **Settings** > scroll down to **Danger Zone**.
+3. Click **Transfer** and follow instructions.
+   - You’ll be asked to type the organization name and confirm.
+4. After the transfer:
+   - The repo lives under the organization.
+   - Update your local `origin` remote:
+     ```bash
+     git remote set-url origin https://github.com/<organization>/<repo>.git
+     ```
+
+---
+
+### **Option 2: Duplicate Repository to Organization**
+(You **copy** the repository to the organization as a separate repo)
+
+#### When to use:
+- You want to keep your personal fork **and** also maintain a version under the organization.
+
+#### Steps:
+1. On GitHub:
+   - Go to the organization and click **New Repository**.
+   - Name it the same or differently.
+   - Create an empty repo (no README or license).
+
+2. On your local machine:
+   ```bash
+   cd <your-local-repo>
+   git remote add upstream-org https://github.com/<organization>/<repo>.git
+   git push upstream-org main  # or master, or the branches you want
+   ```
+
+3. You can now keep it updated by pushing changes to both `origin` and `upstream-org` if needed:
+   ```bash
+   git push origin main
+   git push upstream-org main
+   ```
+
+---
+
+Let me know if you want to set it up to automatically sync between the forks, or need help configuring remotes.
