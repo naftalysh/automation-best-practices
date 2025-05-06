@@ -37,12 +37,12 @@ Output
 
 Note:
 The range of the 32-bit integer is (-2**31 - to 2**31 - 1)
-When we add several integer values, the resulting sum might exceed the above range. You might need to use long int C/C++/Java to store such sums. 
+When we add several integer values, the resulting sum might exceed the above range. You might need to use long int C/C++/Java to store such sums.
 
 Answer:
-When working in Python, you don't need to worry about integer overflow when summing large numbers, 
-as Python's int type is designed to handle arbitrarily large values gracefully. This feature simplifies numerical computations, 
-allowing you to focus on your algorithms without concern for integer overflow issues. 
+When working in Python, you don't need to worry about integer overflow when summing large numbers,
+as Python's int type is designed to handle arbitrarily large values gracefully. This feature simplifies numerical computations,
+allowing you to focus on your algorithms without concern for integer overflow issues.
 
 # Summing a list of large integers in Python
 large_numbers = [2**30, 2**30, 2**30, 2**30]   #[1073741824, 1073741824, 1073741824, 1073741824]
@@ -53,11 +53,7 @@ print(total_sum)  # Output: 4294967296
 
 #!/bin/python3
 
-import math
 import os
-import random
-import re
-import sys
 
 #
 # Complete the 'aVeryBigSum' function below.
@@ -66,14 +62,19 @@ import sys
 # The function accepts LONG_INTEGER_ARRAY ar as parameter.
 #
 
+
 def aVeryBigSum(ar):
     # Write your code here
 
     # Ensure input is a list with exactly ar[0]+1 elements
-    assert isinstance(ar, list) and 1 <= len(ar) <= 10, "Input 'ar' is a list and must have between 1 to 10 elements"
+    assert (
+        isinstance(ar, list) and 1 <= len(ar) <= 10
+    ), "Input 'ar' is a list and must have between 1 to 10 elements"
 
-     # Add assertions for value range
-    assert all(0 <= x <= 10**10 for x in ar), "All elements must satisfy 0 <= x <= 10**10"
+    # Add assertions for value range
+    assert all(
+        0 <= x <= 10**10 for x in ar
+    ), "All elements must satisfy 0 <= x <= 10**10"
 
     # sum = 0
     # for i in range(1, ar[0]):
@@ -85,13 +86,11 @@ def aVeryBigSum(ar):
     return total_sum
 
 
+if __name__ == "__main__":
+    # Set OUTPUT_PATH to the current working directory if not already set
+    os.environ["OUTPUT_PATH"] = os.path.join(os.getcwd(), "output.txt")
 
-
-if __name__ == '__main__':
-     # Set OUTPUT_PATH to the current working directory if not already set
-    os.environ['OUTPUT_PATH'] = os.path.join(os.getcwd(), 'output.txt')
-
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    fptr = open(os.environ["OUTPUT_PATH"], "w")
 
     ar_count = int(input().strip())
     assert 1 <= ar_count <= 10, "0 <= ar_count must <= 10"
@@ -99,9 +98,8 @@ if __name__ == '__main__':
     ar = list(map(int, input().strip().split()))
     result = aVeryBigSum(ar)
 
-    fptr.write(str(result) + '\n')
+    fptr.write(str(result) + "\n")
     fptr.close()
 
     # debug
     print(result)
-

@@ -1,14 +1,14 @@
-1.Kubernetes basics materials: 
+1.Kubernetes basics materials:
    a. This one is new and is absolutely nice: https://www.youtube.com/watch?v=s_o8dwzRlu4
    b. official materials: https://kubernetes.io/docs/tutorials/kubernetes-basics/
    c. Another new one: https://www.guru99.com/kubernetes-tutorial.html
-   d. https://gitlab.com/chmouel/chmouzies - 
+   d. https://gitlab.com/chmouel/chmouzies -
 
 
 2.Operators(something very important for us):
    a. https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
    b. https://www.youtube.com/watch?v=pTbuHoMp68s
-   c. 
+   c.
 
 
 1.Golang Basics:
@@ -18,18 +18,18 @@
 
 2.Go advanced:
      a. https://golangbyexample.com/golang-comprehensive-tutorial/
-     b. Work with k8s library https://www.youtube.com/watch?v=vlw1NYySbmQ . 
+     b. Work with k8s library https://www.youtube.com/watch?v=vlw1NYySbmQ .
         Can be useful when we test with ginkgo application CRDs
-     c. Ginkgo and gomega. Libraries to test with Golang:   
+     c. Ginkgo and gomega. Libraries to test with Golang:
         https://www.youtube.com/watch?v=R-j1phppdzI
      d. https://onsi.github.io/ginkgo/
 
 
 3.GO - More materials
 Go Tutorial - https://www.tutorialspoint.com/go/index.htm
-Welcome To Golang By Example - https://golangbyexample.com/golang-comprehensive-tutorial/ 
+Welcome To Golang By Example - https://golangbyexample.com/golang-comprehensive-tutorial/
 
-# YouTube 
+# YouTube
 Testing All The Things - https://www.youtube.com/c/TestingAllTheThings
 Ginkgo & Gomega  - https://www.youtube.com/watch?v=R-j1phppdzI
 
@@ -43,10 +43,10 @@ Kubernetes Crash Course for Absolute Beginners - https://www.youtube.com/watch?v
 Learn Kubernetes Basics - https://kubernetes.io/docs/tutorials/kubernetes-basics/
 Guru99 - https://www.guru99.com/kubernetes-tutorial.html
 Operator pattern - https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-Tutorial: Introduction to Kubernetes Operators and the Operator Framework - https://www.youtube.com/watch?v=pTbuHoMp68s 
+Tutorial: Introduction to Kubernetes Operators and the Operator Framework - https://www.youtube.com/watch?v=pTbuHoMp68s
 
 
-# TEKTON 
+# TEKTON
 pipelines-tutorial - https://github.com/naftalysh/pipelines-tutorial
 
 
@@ -59,7 +59,7 @@ https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull
 https://github.com/openshift/hive
 
 
-# Horreum 
+# Horreum
 https://horreum.hyperfoil.io/
 
 
@@ -108,4 +108,3 @@ GITLINT - https://jorisroovers.com/gitlint/latest/
 
 # LinkedIn
 Improve Profile - https://www.youtube.com/watch?v=B4OhuzwLc9o#:~:text=URL%3A%20https%3A%2F%2Fwww,100
-

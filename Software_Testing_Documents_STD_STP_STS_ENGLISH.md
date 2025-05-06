@@ -29,7 +29,7 @@
 
 6. **Test Cases**
    - Table format is commonly used to describe test cases:
-   
+
    | **Test Case ID** | **Test Name**          | **Description**                                          | **Preconditions**       | **Steps**                                                                 | **Expected Result**                                     |
    |------------------|------------------------|----------------------------------------------------------|-------------------------|---------------------------------------------------------------------------|---------------------------------------------------------|
    | TC001            | Login to System       | Verify that users can log in with valid credentials.     | Server is up, browser open. | 1. Open the login page.<br>2. Enter valid username and password.<br>3. Click "Login". | User is redirected to the dashboard.                   |
@@ -148,4 +148,3 @@
 | **Content**          | Functions, interfaces, performance, security, constraints.| Types of tests, tools, test cases, risk management, criteria.| Test steps, expected results, bugs.                      |
 | **Primary Users**    | Project Managers, Developers, QA, Clients.               | QA Team, Project Managers.                                | QA Team.                                                  |
 | **Development Phase**| Written early in the project after requirements gathering.| Written after SRS, before testing begins.                | Written during or before testing execution.               |
-

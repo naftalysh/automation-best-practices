@@ -40,19 +40,19 @@ While workflows vary by project, a typical **Performance Test Engineer** process
 
 Infinidat provides various tools for performance testing and analysis. Below is an overview of their usage in the **testing workflow**:
 
-### **1. InfiniMetrics®**  
+### **1. InfiniMetrics®**
 - Used for **real-time and historical performance monitoring** of InfiniBox systems.
 - Establishes baseline performance before executing performance tests.
 
-### **2. Host PowerTools**  
+### **2. Host PowerTools**
 - Used for **testing performance of individual LUNs (Logical Unit Numbers)**.
 - Helps isolate performance issues to specific storage volumes.
 
-### **3. Infinidat Performance Analysis Tool (IPAT)**  
+### **3. Infinidat Performance Analysis Tool (IPAT)**
 - Provides **deep insights into performance metrics**.
 - Helps **identify bottlenecks** and optimize resource allocation.
 
-### **4. InfiniVerse® Platform**  
+### **4. InfiniVerse® Platform**
 - Provides **broad infrastructure-level performance monitoring**.
 - Useful for evaluating **distributed environments**.
 
@@ -116,4 +116,3 @@ Infinidat provides various tools for performance testing and analysis. Below is 
 By understanding the **Performance Test Engineer** role, preparing for technical aspects, and showcasing **problem-solving skills and automation expertise**, you can significantly increase your chances of securing the position at Infinidat.
 
 **Good luck with your interview!** 🎯
-

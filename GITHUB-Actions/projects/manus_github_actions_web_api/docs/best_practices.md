@@ -300,11 +300,11 @@ jobs:
     steps:
       # Checkout the repository
       - uses: actions/checkout@v3
-      
+
       # Setup deployment environment
       - name: Setup environment
         run: ./scripts/setup-env.sh
-        
+
       # ... more steps
 ```
 
@@ -349,11 +349,11 @@ jobs:
   lint:
     name: Code Linting
     # ...
-  
+
   test:
     name: Unit and Integration Tests
     # ...
-  
+
   build:
     name: Build Application
     # ...
@@ -364,10 +364,10 @@ name: CI
 jobs:
   job1:
     # ...
-  
+
   job2:
     # ...
-  
+
   job3:
     # ...
 ```

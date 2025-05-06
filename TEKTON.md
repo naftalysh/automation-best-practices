@@ -22,4 +22,3 @@ Web link: <https://vinamra-jain.medium.com/publishing-tekton-resources-as-bundle
    - tkn bundle push docker.io/myorg/mybundle:latest "apiVersion: tekton.dev/v1beta1 kind: Pipeline..."
    - tkn bundle push docker.io/myorg/mybundle:1.0 -f path/to/my/file.json
    - cat path/to/my/unified_yaml_file.yaml | tkn bundle push myprivateregistry.com/myorg/mybundle -f -
-

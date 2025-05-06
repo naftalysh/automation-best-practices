@@ -20,25 +20,25 @@ oc get ns
 openstack flavor list --sort-column RAM --sort-descending --fit-width
 
 # get openstack resources used by a alls flavors
-openstack flavor list -c Name -c RAM -c Disk -c VCPUs  --sort-column RAM --sort-descending --fit-width 
+openstack flavor list -c Name -c RAM -c Disk -c VCPUs  --sort-column RAM --sort-descending --fit-width
 
 # find specific flavor details (ci.standard.xl)
 openstack flavor list --sort-column RAM --sort-descending --fit-width | grep 'ci.standard.xl\|ID '
 
 # get openstack resources used by a specific flavor (Ex: ci.standard.large)
-openstack flavor list -c Name -c RAM -c Disk -c VCPUs --fit-width | grep 'ci.standard.xl\|Name '   
+openstack flavor list -c Name -c RAM -c Disk -c VCPUs --fit-width | grep 'ci.standard.xl\|Name '
 
  # get flavor list sorted by memory into csv format
-openstack flavor list -f csv --quote none | tail -n +2 | awk -F ',' '{ print $2 "," $3/1024 " GB," $4 "," $6 }' | sort -t',' -k3 -nr   
- 
+openstack flavor list -f csv --quote none | tail -n +2 | awk -F ',' '{ print $2 "," $3/1024 " GB," $4 "," $6 }' | sort -t',' -k3 -nr
+
  # get network (pool) names filtered for _cci__ and shared type network names,  sorted by 'Total IPs'
-openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|shared\|IPs'   
+openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|shared\|IPs'
 
 # get volume (pvc) list
-openstack volume list --long    
+openstack volume list --long
 
 # print also columns names
-openstack volume list --long | grep 'ID' | tr '\n' '\r'  
+openstack volume list --long | grep 'ID' | tr '\n' '\r'
 
 # IP creation
 openstack floating ip create network_name --description "description text"  --tag "reserve"
@@ -47,7 +47,7 @@ openstack floating ip create network_name --description "description text"  --ta
  openstack floating ip delete IP_ID
 
 # List Network names IP summary
-openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|IPs' 
+openstack ip availability list --sort-column 'Total IPs' --sort-descending --fit-width  | grep '_cci_\|IPs'
 
 # list IP addresses
 openstack floating ip list
@@ -69,7 +69,7 @@ oc -n namespace_name describe cd clusterdeployment_name
 # get all namespaces (ns) created per the newly created clusterpool (cp_name)
 oc get ns --sort-by='{.metadata.name}' | grep -i cp_name
 
-# Create the clusterpool named cp_name in ns_name 
+# Create the clusterpool named cp_name in ns_name
 kubectl -n ns_name create -f cp_config.yaml
 
 # get clusterpool list from our namespace
@@ -105,12 +105,8 @@ oc -n ns_name get clusterclaim
 # once we don't need anymore the cluster, we delete the clusterclaim
 oc -n ns_name delete clusterclaim cc_name
 
-# get ClusterDeploymentCustomization 
-oc get ClusterDeploymentCustomization 
+# get ClusterDeploymentCustomization
+oc get ClusterDeploymentCustomization
 
 # delete ClusterDeploymentCustomization
 oc delete ClusterDeploymentCustomization cdc_name
-
-
-
-

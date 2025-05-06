@@ -139,10 +139,3 @@ FROM table
 WHERE condition;
 
 -- Avoid Redundant Data: Normalize your database to eliminate redundant data and ensure data integrity.
-
-
-
-
-
-
-

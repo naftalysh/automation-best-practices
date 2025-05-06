@@ -1,5 +1,5 @@
 
-# System Design and Python Software Design Aspects 
+# System Design and Python Software Design Aspects
 
 ## Table of Contents
 
@@ -66,7 +66,7 @@
 ## General System Design Terms
 
 ### Scalability
-**Definition:** Scalability refers to a system's ability to handle growing amounts of work or expand to accommodate growth.  
+**Definition:** Scalability refers to a system's ability to handle growing amounts of work or expand to accommodate growth.
 
 **Example Implementation:**
 ```python
@@ -79,7 +79,7 @@ rc.set("key1", "value1")
 print(rc.get("key1"))  # Outputs: value1
 ```
 
-**Relevant Data Structures:** Distributed Hash Tables, HashMap, Partitioned Data Stores  
+**Relevant Data Structures:** Distributed Hash Tables, HashMap, Partitioned Data Stores
 **Example (Distributed Caching):**
 ```python
 class SimpleCache:
@@ -100,9 +100,9 @@ print(cache.get("user_id"))  # Outputs: 123
 ---
 
 ### Latency and Throughput
-**Definition:**  
-- **Latency:** Time taken for a single operation or request.  
-- **Throughput:** Number of operations or requests processed in a given time.  
+**Definition:**
+- **Latency:** Time taken for a single operation or request.
+- **Throughput:** Number of operations or requests processed in a given time.
 
 **Example Implementation:**
 ```python
@@ -115,7 +115,7 @@ end_time = time.time()
 print(f"Latency: {end_time - start_time} seconds")
 ```
 
-**Relevant Data Structures:** Circular Buffers, Queues  
+**Relevant Data Structures:** Circular Buffers, Queues
 **Example (Queue for Throughput):**
 ```python
 from queue import Queue
@@ -131,7 +131,7 @@ while not request_queue.empty():
 ---
 
 ### Load Balancing
-**Definition:** Distributes workload evenly across servers or resources to ensure reliability and performance.  
+**Definition:** Distributes workload evenly across servers or resources to ensure reliability and performance.
 
 **Example Implementation:**
 ```python
@@ -145,7 +145,7 @@ def get_server():
 print(f"Request sent to: {get_server()}")
 ```
 
-**Relevant Data Structures:** HashMaps, Consistent Hashing  
+**Relevant Data Structures:** HashMaps, Consistent Hashing
 **Example (Consistent Hashing):**
 ```python
 import hashlib
@@ -546,13 +546,13 @@ from my_package import module1, module2
 ## Python Related Questions and Answers
 
 ### Q1: What is GIL?
-**Answer:** GIL stands for Global Interpreter Lock. It is a mutex in CPython that allows only one thread to execute Python bytecode at a time, even on multi-core systems.  
+**Answer:** GIL stands for Global Interpreter Lock. It is a mutex in CPython that allows only one thread to execute Python bytecode at a time, even on multi-core systems.
 - **Use Case:** Ensures thread safety for operations on Python objects.
 - **Workaround:** Use multiprocessing for CPU-bound tasks.
 
 ### Q2: Difference between generator and iterator?
-**Answer:**  
-- **Iterator:** An object with `__iter__()` and `__next__()` methods to traverse data.  
+**Answer:**
+- **Iterator:** An object with `__iter__()` and `__next__()` methods to traverse data.
 - **Generator:** A function that yields values using `yield`. It automatically implements the iterator protocol.
 
 **Example (Generator):**
@@ -587,7 +587,7 @@ for num in counter:
 ```
 
 ### Q3: What is a predicate?
-**Answer:**  
+**Answer:**
 A predicate is a function that returns a boolean value (`True` or `False`) based on a condition. It is often used in filtering or decision-making.
 
 **Example:**
@@ -599,10 +599,10 @@ print(is_even(4))  # Outputs: True
 ```
 
 ### Q4: What are Python comprehensions?
-**Answer:** Python comprehensions provide a concise way to create collections.  
-- **List comprehension:** `[expression for item in iterable if condition]`  
-- **Dictionary comprehension:** `{key: value for item in iterable}`  
-- **Set comprehension:** `{expression for item in iterable}`  
+**Answer:** Python comprehensions provide a concise way to create collections.
+- **List comprehension:** `[expression for item in iterable if condition]`
+- **Dictionary comprehension:** `{key: value for item in iterable}`
+- **Set comprehension:** `{expression for item in iterable}`
 
 **Example:**
 ```python
@@ -617,9 +617,9 @@ unique_chars = {char for char in "hello"}
 ```
 
 ### Q5: What is the difference between shallow and deep copy in Python?
-**Answer:**  
-- **Shallow Copy:** Copies the reference of objects but not the objects themselves. Changes in nested objects reflect in both copies.  
-- **Deep Copy:** Recursively copies objects, creating completely independent objects.  
+**Answer:**
+- **Shallow Copy:** Copies the reference of objects but not the objects themselves. Changes in nested objects reflect in both copies.
+- **Deep Copy:** Recursively copies objects, creating completely independent objects.
 
 **Example:**
 ```python
@@ -664,8 +664,8 @@ with open("file.txt", "w") as file:
 ```
 
 ### Q8: What is the difference between mutable and immutable types?
-**Answer:**  
-- **Mutable:** Objects that can be changed after creation (e.g., `list`, `dict`, `set`).  
+**Answer:**
+- **Mutable:** Objects that can be changed after creation (e.g., `list`, `dict`, `set`).
 - **Immutable:** Objects that cannot be changed after creation (e.g., `str`, `tuple`, `frozenset`).
 
 **Example:**

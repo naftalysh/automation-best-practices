@@ -1,8 +1,6 @@
-
-
 """
 Problem description:
-Alice and Bob each created one problem for HackerRank. A reviewer rates the two challenges, awarding points on a scale from 1 to 100 for three categories: 
+Alice and Bob each created one problem for HackerRank. A reviewer rates the two challenges, awarding points on a scale from 1 to 100 for three categories:
 problem clarity, originality, and difficulty.
 The rating for Alice's challenge is the triplet a = (a[0], a[1], a[2]), and the rating for Bob's challenge is the triplet b = (b[0], b[1], b[2]).
 
@@ -60,14 +58,9 @@ Sample Output 0
 1 1
 """
 
-
 #!/bin/python3
 
-import math
 import os
-import random
-import re
-import sys
 
 #
 # Complete the 'compareTriplets' function below.
@@ -78,18 +71,22 @@ import sys
 #  2. INTEGER_ARRAY b
 #
 
+
 def compareTriplets(a, b):
     # Write your code here
     # Add assertions
-    
+
     # Ensure inputs are lists with exactly three elements
-    assert isinstance(a, list) and len(a) == 3, "Input 'a' must be a list with exactly 3 elements"
-    assert isinstance(b, list) and len(b) == 3, "Input 'b' must be a list with exactly 3 elements"
-    
+    assert (
+        isinstance(a, list) and len(a) == 3
+    ), "Input 'a' must be a list with exactly 3 elements"
+    assert (
+        isinstance(b, list) and len(b) == 3
+    ), "Input 'b' must be a list with exactly 3 elements"
+
     # Add assertions for value range
     assert all(1 <= x <= 100 for x in a), "All elements must satisfy 1 <= a[i] <= 100"
     assert all(1 <= x <= 100 for x in b), "All elements must satisfy 1 <= b[i] <= 100"
-    
 
     a_score = b_score = 0
     for i in range(3):
@@ -97,26 +94,26 @@ def compareTriplets(a, b):
             a_score += 1
         elif b[i] > a[i]:
             b_score += 1
-    
+
     return [a_score, b_score]
-    
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     # Set OUTPUT_PATH to the current working directory if not already set
-    os.environ['OUTPUT_PATH'] = os.path.join(os.getcwd(), 'output.txt')
-    
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    os.environ["OUTPUT_PATH"] = os.path.join(os.getcwd(), "output.txt")
+
+    fptr = open(os.environ["OUTPUT_PATH"], "w")
 
     a = list(map(int, input().rstrip().split()))
     b = list(map(int, input().rstrip().split()))
     result = compareTriplets(a, b)
 
-    fptr.write(' '.join(map(str, result)))
-    fptr.write('\n')
+    fptr.write(" ".join(map(str, result)))
+    fptr.write("\n")
     fptr.close()
 
     # debug
     print(result)
-
 
 
 """"
@@ -131,7 +128,7 @@ Inside the main function
 os.environ['OUTPUT_PATH'] = os.path.join(os.getcwd(), 'output.txt')
 
 Input:
-5 6 7 
+5 6 7
 3 6 10
 
 Output:

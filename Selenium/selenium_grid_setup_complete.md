@@ -72,22 +72,22 @@ class TestMyFirstTestCase():
   def setup_method(self, method):
     self.driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', desired_capabilities=DesiredCapabilities.CHROME)
     self.vars = {}
-  
+
   def teardown_method(self, method):
     self.driver.quit()
-  
+
   def test_myFirstTestCase(self):
     # Test name: MyFirstTestCase
     # Step # | name | target | value
-    # 1 | open | / | 
+    # 1 | open | / |
     self.driver.get("https://rpachallenge.com/")
-    # 2 | setWindowSize | 1936x1048 | 
+    # 2 | setWindowSize | 1936x1048 |
     self.driver.set_window_size(1936, 1048)
-    # 3 | click | xpath=(.//*[normalize-space(text()) and normalize-space(.)='Role in Company'])[1]/following::input | 
+    # 3 | click | xpath=(.//*[normalize-space(text()) and normalize-space(.)='Role in Company'])[1]/following::input |
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'Role in Company'])[1]/following::input").click()
     # 4 | type | xpath=(.//*[normalize-space(text()) and normalize-space(.)'Role in Company'])[1]/following::input | Senior QA Engineer
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'Role in Company'])[1]/following::input").send_keys("Senior QA Engineer")
-    # 5 | click | xpath=(.//*[normalize-space(text()) and normalize-space(.)'First Name'])[1]/following::input | 
+    # 5 | click | xpath=(.//*[normalize-space(text()) and normalize-space(.)'First Name'])[1]/following::input |
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'First Name'])[1]/following::input").click()
     # 6 | type | xpath=(.//*[normalize-space(text()) and normalize-space(.)'First Name'])[1]/following::input | Naftaly
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'First Name'])[1]/following::input").send_keys("Naftaly")
@@ -101,7 +101,7 @@ class TestMyFirstTestCase():
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'Company Name'])[1]/following::input").send_keys("NOTL")
     # 11 | type | xpath=(.//*[normalize-space(text()) and normalize-space(.)'Email'])[1]/following::input | test1@gmail.com
     self.driver.find_element(By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)'Email'])[1]/following::input").send_keys("test1@gmail.com")
-    # 12 | click | css=.btn:nth-child(2) | 
+    # 12 | click | css=.btn:nth-child(2) |
     self.driver.find_element(By.CSS_SELECTOR, ".btn:nth-child(2)").click()
 ```
 

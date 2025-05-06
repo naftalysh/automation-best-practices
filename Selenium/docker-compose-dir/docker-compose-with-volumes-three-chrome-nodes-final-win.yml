@@ -119,7 +119,7 @@ volumes:
       # absolute path
       device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-logs-2
       # relative path
-      
+
   chrome-screenshots-3:
     driver: local
     driver_opts:
@@ -128,7 +128,7 @@ volumes:
       # absolute path
       device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-screenshots-3
       # relative path
-      
+
 
   chrome-logs-3:
     driver: local
@@ -138,7 +138,7 @@ volumes:
       # absolute path
       device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/chrome-logs-3
       # relative path
-      
+
 
   firefox-screenshots:
     driver: local
@@ -148,7 +148,7 @@ volumes:
       # absolute path
       device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/firefox-screenshots
       # relative path
-      
+
 
   firefox-logs:
     driver: local
@@ -158,7 +158,7 @@ volumes:
       # absolute path
       device: /mnt/c/Naftaly/WorkMaterials/automation-best-practices/Selenium/volumes/firefox-logs
       # relative path
-      
+
 
 # -----------------------------------------------------------------------------
 # Bootstrap and Strip Guide:
@@ -182,7 +182,7 @@ volumes:
 #    run the command with the --volumes flag:
 #    $ docker-compose down --volumes
 #
-# 3. The --volumes option will delete all the data stored in the volumes, 
+# 3. The --volumes option will delete all the data stored in the volumes,
 #    so use this option only if you do not need to retain the logs or screenshots.
 
 # To use specific yml file, use the below format:
@@ -196,7 +196,7 @@ volumes:
 #   Ex: For Fedora:
 #   sudo dnf install podman python3-pip
 #   pip3 install podman-compose
-# 
+#
 # Workarounds for podman-compose who doesn't know how to relate to relative volume paths:
 # 1. Pre-create Directories:
 #    Manually create the directories before running podman-compose. This ensures that Podman has the correct directories available for mounting.
@@ -209,8 +209,8 @@ volumes:
 # Mitigate volumes issues ---
 # ===========================
 # Restart Podman and Rebuild the Containers: Sometimes, Podman may cache certain states that prevent proper volume mounting. Restart Podman and rebuild the containers:
-# 
+#
 # podman-compose down
 # podman-compose up -d --build
-# 
+#
 # -----------------------------------------------------------------------------

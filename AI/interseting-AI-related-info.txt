@@ -1,15 +1,15 @@
-https://github.com/coleam00/bolt.new-any-llm - This repository allows you to prompt, run, edit, and deploy full-stack web applications using various large language models (LLMs) of your choice. 
+https://github.com/coleam00/bolt.new-any-llm - This repository allows you to prompt, run, edit, and deploy full-stack web applications using various large language models (LLMs) of your choice.
 
-oTToDev is directly related to the repository https://github.com/coleam00/bolt.new-any-llm. This repository, created by Cole Medin, serves as the foundation for oTToDev, 
+oTToDev is directly related to the repository https://github.com/coleam00/bolt.new-any-llm. This repository, created by Cole Medin, serves as the foundation for oTToDev,
 an enhanced version of the original Bolt.new project.
 
 Key Features of oTToDev:
-1. Multiple LLM Integration: oTToDev allows users to select from various large language models (LLMs) for each prompt, 
-   including OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, and Groq models. 
+1. Multiple LLM Integration: oTToDev allows users to select from various large language models (LLMs) for each prompt,
+   including OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, and Groq models.
 
-2. In-Browser Development Environment: Leveraging StackBlitz’s WebContainers, oTToDev enables full-stack web development directly in the browser, eliminating the need for local setup. 
+2. In-Browser Development Environment: Leveraging StackBlitz’s WebContainers, oTToDev enables full-stack web development directly in the browser, eliminating the need for local setup.
 
-3. Community Contributions: The project is actively maintained, with contributions adding features like OpenRouter and Gemini integrations, 
+3. Community Contributions: The project is actively maintained, with contributions adding features like OpenRouter and Gemini integrations,
    automatic generation of Ollama models, and the ability to publish projects directly to GitHub.
 
 
@@ -17,7 +17,7 @@ Key Features of oTToDev:
 Getting Started with oTToDev:
 # ============================
 
-Step-by-Step Installation Guide - 
+Step-by-Step Installation Guide -
 # =============================
 1. Install Git and Node.js
     - Git: Download and install Git from git-scm.com.
@@ -51,14 +51,14 @@ Step-by-Step Installation Guide -
         GROQ_API_KEY=XXX
         OPENAI_API_KEY=XXX
         ANTHROPIC_API_KEY=XXX
-        VITE_LOG_LEVEL=debug    
+        VITE_LOG_LEVEL=debug
 
         For instance:
         GROQ_API_KEY=your_groq_api_key
         OPENAI_API_KEY=your_openai_api_key
         ANTHROPIC_API_KEY=your_anthropic_api_key
 
-        Note: Only set the keys for the LLMs you intend to use.  
+        Note: Only set the keys for the LLMs you intend to use.
 
 7. Run the Application
     - Start the development server:
@@ -74,7 +74,7 @@ Step-by-Step Installation Guide -
 
         - For production:
           npm run dockerbuild:prod
-    
+
     - Run Docker Container:
         - For development:
           docker-compose --profile development up
@@ -87,7 +87,7 @@ Step-by-Step Installation Guide -
         - Create a Modelfile:
           echo "FROM [Ollama model ID such as qwen2.5-coder:7b]" > Modelfile
           echo "PARAMETER num_ctx 32768" >> Modelfile
-        
+
         - Create the new model:
           ollama create -f Modelfile [your new model ID, can be whatever you want (example: qwen2.5-coder-extra-ctx:7b)]
 
@@ -144,7 +144,7 @@ By following these steps, you should be able to set up and run the "bolt.new-any
 - Install Dependencies: Navigate to the project directory and install the necessary dependencies using pnpm:
   pnpm install
 
-- Configure Environment Variables: Rename .env.example to .env.local and add your LLM API keys. 
+- Configure Environment Variables: Rename .env.example to .env.local and add your LLM API keys.
   For instance:
 
   GROQ_API_KEY=your_groq_api_key
@@ -156,8 +156,8 @@ By following these steps, you should be able to set up and run the "bolt.new-any
 - Run the Application: Start the development server:
   pnpm run dev
 
-- terminate the process - 
-  - Using Keyboard Shortcut: While the server is running in your terminal, press Ctrl + C. This sends an interrupt signal to the process, terminating it gracefully. 
+- terminate the process -
+  - Using Keyboard Shortcut: While the server is running in your terminal, press Ctrl + C. This sends an interrupt signal to the process, terminating it gracefully.
 
   - Using Process Management Tools: If the server doesn't stop with Ctrl + C, you can identify the process ID (PID) and terminate it manually:
     - List all running Node.js processes:

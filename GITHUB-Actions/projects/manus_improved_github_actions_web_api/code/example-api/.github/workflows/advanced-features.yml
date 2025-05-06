@@ -32,28 +32,28 @@ jobs:
           - os: macos-latest
             node-version: 14.x
       fail-fast: false
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      
+
       - name: Start MongoDB ${{ matrix.mongodb-version }}
         uses: supercharge/mongodb-github-action@1.8.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run tests
         run: npm test
-      
+
       - name: Report matrix build status
         run: |
           echo "Build completed on ${{ matrix.os }} with Node.js ${{ matrix.node-version }} and MongoDB ${{ matrix.mongodb-version }}"
@@ -62,17 +62,17 @@ jobs:
     name: Dependency Caching Demo
     if: github.event.inputs.feature == 'caching'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Cache node modules
         uses: actions/cache@v3
         id: npm-cache
@@ -83,11 +83,11 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-      
+
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
-      
+
       - name: Report cache status
         run: |
           if [ "${{ steps.npm-cache.outputs.cache-hit }}" == "true" ]; then
@@ -95,7 +95,7 @@ jobs:
           else
             echo "Cache miss! Installed fresh dependencies."
           fi
-      
+
       - name: Run tests with cached dependencies
         run: npm test
 
@@ -113,17 +113,17 @@ jobs:
     name: Composite Action Demo
     if: github.event.inputs.feature == 'composite-action'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup and test API
         uses: ./.github/actions/setup-and-test
         with:
           node-version: '16'
           mongodb-version: '4.4'
-      
+
       - name: Report composite action result
         run: echo "Composite action completed successfully!"
 
@@ -138,11 +138,11 @@ jobs:
       matrix:
         environment: [development, staging, production]
       fail-fast: false
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup environment-specific config
         run: |
           echo "Setting up ${{ matrix.environment }} environment"
@@ -151,7 +151,7 @@ jobs:
           echo "MONGO_URI=mongodb://localhost:27017/example-api-${{ matrix.environment }}" >> .env
           echo "JWT_SECRET=secret_for_${{ matrix.environment }}" >> .env
           echo "JWT_EXPIRE=1d" >> .env
-      
+
       - name: Deploy to environment
         id: deploy
         run: |
@@ -159,14 +159,14 @@ jobs:
           # In a real scenario, this would deploy to the actual environment
           echo "deployment-url=https://${{ matrix.environment }}.example-api.com" >> $GITHUB_OUTPUT
           echo "Deployment completed!"
-      
+
       - name: Wait for approval
         if: matrix.environment == 'production'
         run: |
           echo "Production deployment requires manual approval."
           echo "In a real scenario, this would pause for approval."
           # This is where GitHub's environment protection rules would apply
-      
+
       - name: Run post-deployment checks
         run: |
           echo "Running post-deployment checks for ${{ matrix.environment }}..."

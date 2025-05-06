@@ -1,12 +1,13 @@
-
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+
 
 class HomePage(BasePage):
     """
     HomePage represents the home page of the website.
     It contains methods to interact with elements on the home page.
     """
+
     # Locators for elements on the home page
     SEARCH_INPUT = (By.ID, "search-bar")  # Example, update with actual ID
     SEARCH_BUTTON = (By.ID, "search-button")  # Example, update with actual ID
@@ -19,7 +20,7 @@ class HomePage(BasePage):
     def __init__(self, driver):
         """
         Initializes the HomePage with a WebDriver instance and navigates to the home page URL.
-        
+
         :param driver: Instance of WebDriver
         """
         super().__init__(driver)
@@ -28,16 +29,16 @@ class HomePage(BasePage):
     def search(self, query):
         """
         Performs a search action on the home page.
-        
+
         :param query: Search query string
         """
         self.enter_text(query, *self.SEARCH_INPUT)
         self.click_element(*self.SEARCH_BUTTON)
-        
+
     def sign_in(self, email, password):
         """
         Performs a sign-in action on the home page.
-        
+
         :param email: User email
         :param password: User password
         """

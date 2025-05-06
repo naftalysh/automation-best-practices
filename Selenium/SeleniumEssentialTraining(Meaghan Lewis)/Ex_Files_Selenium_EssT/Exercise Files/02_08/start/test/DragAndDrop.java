@@ -16,4 +16,3 @@ public class DragAndDrop {
         driver.quit();
     }
 }
-

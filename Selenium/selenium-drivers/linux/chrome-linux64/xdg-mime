@@ -520,7 +520,7 @@ detectDE()
            DE=gnome;
            ;;
          LXDE)
-           DE=lxde; 
+           DE=lxde;
            ;;
          xfce|xfce4)
            DE=xfce;
@@ -530,7 +530,7 @@ detectDE()
 
     if [ x"$DE" = x"" ]; then
       # fallback to uname output for other platforms
-      case "$(uname 2>/dev/null)" in 
+      case "$(uname 2>/dev/null)" in
         Darwin)
           DE=darwin;
           ;;
@@ -1399,4 +1399,3 @@ esac
 update_mime_database $xdg_base_dir
 
 exit_success
-

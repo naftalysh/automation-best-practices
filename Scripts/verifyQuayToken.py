@@ -3,10 +3,12 @@ import asyncio
 import argparse
 import json
 
+
 async def fetch(session, url, token):
     headers = {"Authorization": f"Bearer {token}"}
     async with session.get(url, headers=headers) as response:
         return await response.text()
+
 
 async def verify_token(url, token):
     async with aiohttp.ClientSession() as session:
@@ -15,10 +17,11 @@ async def verify_token(url, token):
         pretty_data = json.dumps(data, indent=4)  # pretty-print the JSON object
         print(pretty_data)
 
-parser = argparse.ArgumentParser(description='Verify Quay.io OAuth Token.')
-parser.add_argument('org', help='The Quay.io organization.')
-parser.add_argument('repo', help='The Quay.io repository.')
-parser.add_argument('token', help='The Quay.io OAuth Token.')
+
+parser = argparse.ArgumentParser(description="Verify Quay.io OAuth Token.")
+parser.add_argument("org", help="The Quay.io organization.")
+parser.add_argument("repo", help="The Quay.io repository.")
+parser.add_argument("token", help="The Quay.io OAuth Token.")
 
 args = parser.parse_args()
 

@@ -116,7 +116,7 @@
             left = merge_sort(arr[:mid])
             right = merge_sort(arr[mid:])
             return merge(left, right)
-        
+
         def merge(left, right):
             result = []
             i = j = 0
@@ -700,7 +700,7 @@
       dq.append(4)
       print(dq)  # Output: deque([0, 1, 2, 3, 4])
       ```
-    </details>    
+    </details>
 
 ## 3. Array Module
 
@@ -1538,7 +1538,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -1917,7 +1917,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -2103,6 +2103,3 @@ print(df)
 # 0    Alice   25
 # 1      Bob   30
 # 2  Charlie   35
-
-
-

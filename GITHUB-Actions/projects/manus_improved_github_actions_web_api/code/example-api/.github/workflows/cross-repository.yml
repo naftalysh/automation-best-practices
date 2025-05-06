@@ -19,11 +19,11 @@ jobs:
   process_external_event:
     name: Process External Event
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Log event details
         run: |
           echo "Received external event:"
@@ -35,7 +35,7 @@ jobs:
           else
             echo "Manual action: ${{ github.event.inputs.action }}"
           fi
-      
+
       - name: Determine action
         id: action
         run: |
@@ -44,29 +44,29 @@ jobs:
           else
             echo "action=${{ github.event.inputs.action }}" >> $GITHUB_OUTPUT
           fi
-  
+
   sync_repositories:
     name: Sync with Related Repositories
     needs: process_external_event
     if: needs.process_external_event.outputs.action == 'api-update' || needs.process_external_event.outputs.action == 'sync'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Sync API schema
         run: |
           echo "Syncing API schema with related repositories..."
           # In a real scenario, this would fetch and update API schemas from other repositories
           echo "API schema synchronized successfully!"
-      
+
       - name: Update documentation
         run: |
           echo "Updating documentation based on API changes..."
           # In a real scenario, this would update documentation based on API changes
           echo "Documentation updated successfully!"
-      
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
@@ -79,7 +79,7 @@ jobs:
     needs: process_external_event
     if: needs.process_external_event.outputs.action == 'dependency-update' || needs.process_external_event.outputs.action == 'notify'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Notify client repository
         run: |
@@ -91,7 +91,7 @@ jobs:
           #   https://api.github.com/repos/owner/client-repo/dispatches \
           #   -d '{"event_type":"api-updated","client_payload":{"ref":"${{ github.ref }}","sha":"${{ github.sha }}"}}'
           echo "Client repository notified successfully!"
-      
+
       - name: Notify documentation repository
         run: |
           echo "Notifying documentation repository of API changes..."
@@ -108,7 +108,7 @@ jobs:
     needs: process_external_event
     if: needs.process_external_event.outputs.action == 'trigger-client-build'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Trigger client build workflow
         run: |

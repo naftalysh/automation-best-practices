@@ -33,15 +33,15 @@
         docker.io/jenkins/jenkins:lts
     ```
 
-  
-2. **[Access the Jenkins Web Interface)](http://localhost:8080)** - 
-3. **[Find the Initial Admin Password]()**    
+
+2. **[Access the Jenkins Web Interface)](http://localhost:8080)** -
+3. **[Find the Initial Admin Password]()**
     When Jenkins starts for the first time, it generates a default admin password. To retrieve it, you need to check the contents of the secrets/initialAdminPassword file inside the Jenkins container.
-    
+
     You can retrieve the password using the following command:
     ```sh
         podman exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
-    ``` 
+    ```
     This command will print the initial admin password to the console.
 
 4. **[Log In to Jenkins]()**
@@ -63,11 +63,9 @@
    -->  "Name": "jenkins_home",
         "Source": "/home/nafta/.local/share/containers/storage/volumes/jenkins_home/_data",
    ```
-   * Comment: Your current setup with the mounted volume will ensure that all Jenkins data is persistent across multiple Jenkins bootstraps. You don’t need to worry about data loss when stopping or restarting the Jenkins container. 
+   * Comment: Your current setup with the mounted volume will ensure that all Jenkins data is persistent across multiple Jenkins bootstraps. You don’t need to worry about data loss when stopping or restarting the Jenkins container.
 
 7. **[Stop and Remove the Jenkins Container]()**
    ```sh
    podman stop jenkins && podman rm jenkins && podman ps -a
    ```
-
-

@@ -21,14 +21,14 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    
+
     if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Product not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       data: product
@@ -45,7 +45,7 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    
+
     res.status(201).json({
       success: true,
       data: product
@@ -69,14 +69,14 @@ exports.updateProduct = async (req, res) => {
         runValidators: true
       }
     );
-    
+
     if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Product not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       data: product
@@ -93,14 +93,14 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
-    
+
     if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Product not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       data: {}

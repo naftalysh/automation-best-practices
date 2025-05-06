@@ -2,11 +2,11 @@
 
 clear
 
-# If kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090  & returns 
-# Unable to listen on port 9090: Listeners failed to create with the following errors: 
-#  [unable to create listener: Error listen tcp4 127.0.0.1:9090: bind: address already in use unable to create listener: Error listen tcp6 [::1]:9090: bind: address already in use]  
-# find which processes are using that port with - 
-# lsof -i :9090    
+# If kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090  & returns
+# Unable to listen on port 9090: Listeners failed to create with the following errors:
+#  [unable to create listener: Error listen tcp4 127.0.0.1:9090: bind: address already in use unable to create listener: Error listen tcp6 [::1]:9090: bind: address already in use]
+# find which processes are using that port with -
+# lsof -i :9090
 
 # app: prometheus
 
@@ -34,7 +34,7 @@ if [ -z "$PROMETHEUS_POD" ]; then
 else
     echo "PROMETHEUS_POD with labels of app.kubernetes.io/component=prometheus or app=prometheus are not found"
     echo "existings prometheus named pod labels are:"
-    echo "$(oc get pods -n $NS -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels}{"\n"}{end}' | grep -i prometheus)" 
+    echo "$(oc get pods -n $NS -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels}{"\n"}{end}' | grep -i prometheus)"
   exit 1
 fi
 
@@ -55,29 +55,29 @@ rm $targetsFilename 2>/dev/null
 # metrics=$(oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data | to_entries[] | select(.value[].type and .value[].help) | [.key, .value[].type, .value[].help] | @csv' | sort -u)
 
 # Otherwise use the following:
-kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090 >/dev/null &      
-PID=$(ps aux | grep "kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090" | grep -v grep | awk '{print $2}')      
+kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090 >/dev/null &
+PID=$(ps aux | grep "kubectl port-forward -n $NS $PROMETHEUS_POD 9090:9090" | grep -v grep | awk '{print $2}')
 metrics=$(curl -s http://localhost:9090/api/v1/metadata | jq -r '.data | to_entries[] | select(.value[].type and .value[].help) | [.key, .value[].type, .value[].help] | @csv' | sort -u)
 pkill -P $PID
 
-echo "$metrics" > $metricsFilename 
+echo "$metrics" > $metricsFilename
 
 for pod in $PODS; do
     echo "Retrieving metrics targets metadata from $pod..."
-    sleep 1 
+    sleep 1
 
     podname=$(basename $pod)
     podTargetsFilename="targets-$NS-$podname.json"
 
     # targets=$(oc rsh -n $NS $pod curl -s http://localhost:9090/api/v1/targets/metadata | jq -r .)
-     
-    kubectl port-forward -n $NS $pod 9090:9090 >/dev/null &      
-    PID=$(ps aux | grep "kubectl port-forward -n $NS $pod 9090:9090" | grep -v grep | awk '{print $2}')   
+
+    kubectl port-forward -n $NS $pod 9090:9090 >/dev/null &
+    PID=$(ps aux | grep "kubectl port-forward -n $NS $pod 9090:9090" | grep -v grep | awk '{print $2}')
     targets=$(curl -s http://localhost:9090/api/v1/targets/metadata | jq -r .)
     pkill -P $PID
 
     echo $targets > $podTargetsFilename
-    
+
     # beutify targets json file
     jq --indent 4 . $podTargetsFilename > tmpfile.json && sleep 1 && mv tmpfile.json $podTargetsFilename
 
@@ -86,7 +86,7 @@ for pod in $PODS; do
     rm $podTargetsFilename
 
     # separate metrics to one per line
-    # cat $metricsFilename | tr ' ' '\n' > tmpfile.json && sleep 1 && mv tmpfile.json $metricsFilename   
+    # cat $metricsFilename | tr ' ' '\n' > tmpfile.json && sleep 1 && mv tmpfile.json $metricsFilename
 done
 
 
@@ -100,7 +100,7 @@ ls -ltra *.json *.csv
 # fetch metric names, type and help field
 # oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data | to_entries[] | select(.value[].type and .value[].help) | [.key, .value[].type, .value[].help] | @csv' | sort -u
 
-# oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data | to_entries[] | select(.value[].type and .value[].help) | [.key, .value[].type, .value[].help] | @csv' | sort -u | tee all_unique_metrics.txt 
+# oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data | to_entries[] | select(.value[].type and .value[].help) | [.key, .value[].type, .value[].help] | @csv' | sort -u | tee all_unique_metrics.txt
 
 # This command sometimes displays 4 fields in a line with two type field values, we need to fix it to discard in this case the third field
 # fix it
@@ -123,7 +123,7 @@ ls -ltra *.json *.csv
 # METRIC_NAME="http_requests_total"
 # metric="http_requests_total"
 
-# 
+#
 # Read all metrics names from file
 # while read METRIC_NAME; do
 #   Fetch metric attributes
@@ -145,14 +145,14 @@ ls -ltra *.json *.csv
 
 
 #   The following outputs two rows one per the metric's type and the other for it's help field
-#   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq '.["data"]["workqueue_work_duration_seconds"][0]["type", "help"]'  
+#   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq '.["data"]["workqueue_work_duration_seconds"][0]["type", "help"]'
 
 #   as above in csv format for all metrics
 #   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data[][0] | [.metric, .type, .help] | @csv'
 
 
 #   output all valid metrics records as csv with only the type and help fields
-#   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data[][0] | [.type, .help] | @csv'  | sort -u | grep -v "unknown" | grep "\"" | wc -l 
+#   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data[][0] | [.type, .help] | @csv'  | sort -u | grep -v "unknown" | grep "\"" | wc -l
 
 #   output all metricses type and help fields in a table format
 #   oc rsh -n $NS $PROMETHEUS_POD curl -s http://localhost:9090/api/v1/metadata | jq -r '.data[][0] | [.type, .help] | @csv' | column -t -s ','
@@ -175,4 +175,3 @@ ls -ltra *.json *.csv
 #   echo "$metric_attributes"
 #   echo "============================="
 # done < "$METRICS_FILE"
-

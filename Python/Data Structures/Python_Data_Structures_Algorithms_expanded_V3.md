@@ -84,7 +84,7 @@
             left = merge_sort(arr[:mid])
             right = merge_sort(arr[mid:])
             return merge(left, right)
-        
+
         def merge(left, right):
             result = []
             i = j = 0
@@ -1315,7 +1315,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -1683,7 +1683,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0

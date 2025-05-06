@@ -14,7 +14,7 @@ def sum_of_multiples(limit):
     sum_5 = sum(i for i in range(5, limit, 5))
     # Sum multiples of 15 (to avoid double-counting)
     sum_15 = sum(i for i in range(15, limit, 15))
-    
+
     # Return the total sum
     return sum_3 + sum_5 - sum_15
 
@@ -38,12 +38,12 @@ Space Complexity: O(1)
 def even_fibonacci_sum(limit):
     a, b = 1, 2  # Initialize first two Fibonacci numbers
     total_sum = 0
-    
+
     while b <= limit:
         if b % 2 == 0:
             total_sum += b
         a, b = b, a + b  # Generate next Fibonacci number
-    
+
     return total_sum
 
 """
@@ -101,13 +101,13 @@ def largest_palindrome_product(digits):
     # Define range for numbers with the given number of digits
     start = 10**(digits - 1)
     end = 10**digits
-    
+
     for i in range(end - 1, start - 1, -1):
         for j in range(i, start - 1, -1):
             product = i * j
             if is_palindrome(product) and product > max_product:
                 max_product = product
-                
+
     return max_product
 
 # Calculate the largest palindrome product of two 3-digit numbers
@@ -120,7 +120,7 @@ Explanation:
     • It keeps track of the largest palindrome found.
 """
 
-"""    
+"""
 #
 5. Smallest multiple
 #
@@ -128,7 +128,7 @@ Description: Find the smallest positive number that is evenly divisible by all o
 Algorithm: LCM via GCD
 Time Complexity: O(n log n)
 Space Complexity: O(1)
- 
+
 """
 from math import gcd
 def lcm(a, b):
@@ -184,7 +184,7 @@ Description: Find the 10001st prime number.
 Algorithm: Sieve of Eratosthenes
 Time Complexity: O(n log log n)
 Space Complexity: O(n)
-""" 
+"""
 def sieve_of_eratosthenes(limit):
     sieve = [True] * (limit + 1)
     sieve[0], sieve[1] = False, False
@@ -240,7 +240,7 @@ Explanation:
     • For each window, it calculates the product of the digits and updates the maximum product found.
 """
 
-"""    
+"""
 #
 9. Special Pythagorean triplet
 #
@@ -267,8 +267,8 @@ Explanation:
 
 """
 10. Summation of primes
-Description: Find the sum of all primes below two million. 
-Algorithm: Sieve of Eratosthenes 
+Description: Find the sum of all primes below two million.
+Algorithm: Sieve of Eratosthenes
 Time Complexity: O(n log log n) Space Complexity: O(n)
 """
 def sieve_of_eratosthenes(limit):
@@ -291,8 +291,8 @@ print(result)  # Output: 142913828922
 #
 11. Largest product in a grid
 #
-Description: Find the greatest product of four adjacent numbers in the same direction in a 20x20 grid. 
-Algorithm: Brute force with window checks 
+Description: Find the greatest product of four adjacent numbers in the same direction in a 20x20 grid.
+Algorithm: Brute force with window checks
 Time Complexity: O(n^2) Space Complexity: O(1)
 """
 def largest_grid_product(grid, span):
@@ -332,9 +332,9 @@ print(result)  # Output depends on the grid values
 #
 12. Highly divisible triangular number
 #
-Description: Find the value of the first triangular number to have over five hundred divisors. 
-Algorithm: Divisor count via prime factorization 
-Time Complexity: O(n√n) 
+Description: Find the value of the first triangular number to have over five hundred divisors.
+Algorithm: Divisor count via prime factorization
+Time Complexity: O(n√n)
 Space Complexity: O(1)
 """
 def count_divisors(n):
@@ -359,9 +359,9 @@ print(result)  # Output: 76576500
 #
 13. Large sum
 #
-Description: Find the first ten digits of the sum of one-hundred 50-digit numbers. 
-Algorithm: Direct summation of strings 
-Time Complexity: O(n) 
+Description: Find the first ten digits of the sum of one-hundred 50-digit numbers.
+Algorithm: Direct summation of strings
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def large_sum(numbers):
@@ -379,9 +379,9 @@ print(result)  # Output: first ten digits of the sum
 #
 14. Longest Collatz sequence
 #
-Description: Find the starting number under one million that produces the longest Collatz sequence. 
-Algorithm: Iterative sequence generation with memoization 
-Time Complexity: O(n log n) 
+Description: Find the starting number under one million that produces the longest Collatz sequence.
+Algorithm: Iterative sequence generation with memoization
+Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
 def collatz_sequence_length(n, memo):
@@ -417,9 +417,9 @@ print(result)  # Output: 837799
 #
 15. Lattice paths
 #
-Description: Find the number of routes through a 20x20 grid. 
-Algorithm: Combinatorics (binomial coefficients) 
-Time Complexity: O(1) 
+Description: Find the number of routes through a 20x20 grid.
+Algorithm: Combinatorics (binomial coefficients)
+Time Complexity: O(1)
 Space Complexity: O(1)
 """
 from math import factorial
@@ -434,9 +434,9 @@ print(result)  # Output: 137846528820
 #
 16. Power digit sum
 #
-Description: Find the sum of the digits of the number 2^1000. 
-Algorithm: Direct computation and summation 
-Time Complexity: O(n) 
+Description: Find the sum of the digits of the number 2^1000.
+Algorithm: Direct computation and summation
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def power_digit_sum(base, exponent):
@@ -450,16 +450,16 @@ print(result)  # Output: 1366
 #
 17. Number letter counts
 #
-Description: Find the number of letters used to write out all the numbers from 1 to 1000 in words. 
-Algorithm: Direct counting with string manipulation 
-Time Complexity: O(1) 
+Description: Find the number of letters used to write out all the numbers from 1 to 1000 in words.
+Algorithm: Direct counting with string manipulation
+Time Complexity: O(1)
 Space Complexity: O(1)
 """
 def number_to_words(n):
     words = {
         1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten',
-        11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 16: 'sixteen', 17: 'seventeen', 
-        18: 'eighteen', 19: 'nineteen', 20: 'twenty', 30: 'thirty', 40: 'forty', 50: 'fifty', 60: 'sixty', 
+        11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 16: 'sixteen', 17: 'seventeen',
+        18: 'eighteen', 19: 'nineteen', 20: 'twenty', 30: 'thirty', 40: 'forty', 50: 'fifty', 60: 'sixty',
         70: 'seventy', 80: 'eighty', 90: 'ninety'
     }
     if n == 1000:
@@ -487,9 +487,9 @@ print(result)  # Output: 21124
 #
 18. Maximum path sum I
 #
-Description: Find the maximum total from top to bottom of the triangle. 
-Algorithm: Dynamic programming 
-Time Complexity: O(n^2) 
+Description: Find the maximum total from top to bottom of the triangle.
+Algorithm: Dynamic programming
+Time Complexity: O(n^2)
 Space Complexity: O(n)
 """
 def maximum_path_sum(triangle):
@@ -512,9 +512,9 @@ print(result)  # Output: 1074
 #
 19. Counting Sundays
 #
-Description: Count the number of Sundays that fell on the first of the month during the twentieth century. 
-Algorithm: Date manipulation 
-Time Complexity: O(1) 
+Description: Count the number of Sundays that fell on the first of the month during the twentieth century.
+Algorithm: Date manipulation
+Time Complexity: O(1)
 Space Complexity: O(1)
 """
 from datetime import date
@@ -533,9 +533,9 @@ print(result)  # Output: 171
 #
 20. Factorial digit sum
 #
-Description: Find the sum of the digits in the number 100!. 
-Algorithm: Direct computation and summation 
-Time Complexity: O(n) 
+Description: Find the sum of the digits in the number 100!.
+Algorithm: Direct computation and summation
+Time Complexity: O(n)
 Space Complexity: O(n)
 """
 def factorial_digit_sum(n):
@@ -549,9 +549,9 @@ print(result)  # Output: 648
 #
 21. Amicable numbers
 #
-Description: Evaluate the sum of all the amicable numbers under 10000. 
-Algorithm: Divisor sum 
-Time Complexity: O(n log n) 
+Description: Evaluate the sum of all the amicable numbers under 10000.
+Algorithm: Divisor sum
+Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
 def sum_of_divisors(n):
@@ -579,9 +579,9 @@ print(result)  # Output: 31626
 #
 22. Names scores
 #
-Description: Sort the given names and calculate the total of all the name scores in the file. 
-Algorithm: Sorting and indexing 
-Time Complexity: O(n log n) 
+Description: Sort the given names and calculate the total of all the name scores in the file.
+Algorithm: Sorting and indexing
+Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
 def name_score(name, position):
@@ -602,9 +602,9 @@ print(result)  # Output depends on the names
 #
 23. Non-abundant sums
 #
-Description: Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers. 
-Algorithm: Divisor sum and array manipulation 
-Time Complexity: O(n^2) 
+Description: Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+Algorithm: Divisor sum and array manipulation
+Time Complexity: O(n^2)
 Space Complexity: O(n)
 """
 def is_abundant(n):
@@ -628,9 +628,9 @@ print(result)  # Output: 4179871
 #
 24. Lexicographic permutations
 #
-Description: Find the millionth lexicographic permutation of the digits 0 to 9. 
-Algorithm: Factoradic number system 
-Time Complexity: O(n) 
+Description: Find the millionth lexicographic permutation of the digits 0 to 9.
+Algorithm: Factoradic number system
+Time Complexity: O(n)
 Space Complexity: O(n)
 """
 from math import factorial
@@ -656,9 +656,9 @@ print(result)  # Output: 2783915460
 #
 25. 1000-digit Fibonacci number
 #
-Description: Find the index of the first term in the Fibonacci sequence to contain 1000 digits. 
-Algorithm: Fibonacci sequence with big integers 
-Time Complexity: O(n log n) 
+Description: Find the index of the first term in the Fibonacci sequence to contain 1000 digits.
+Algorithm: Fibonacci sequence with big integers
+Time Complexity: O(n log n)
 Space Complexity: O(1)
 """
 def fibonacci_index_with_digits(digit_count):
@@ -676,9 +676,9 @@ print(result)  # Output: 4782
 #
 26. Reciprocal cycles
 #
-Description: Find the value of d < 1000 for which 1/d contains the longest recurring cycle. 
-Algorithm: Long division with cycle detection 
-Time Complexity: O(n^2) 
+Description: Find the value of d < 1000 for which 1/d contains the longest recurring cycle.
+Algorithm: Long division with cycle detection
+Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
 def reciprocal_cycle_length(d):
@@ -708,9 +708,9 @@ print(result)  # Output: 983
 #
 27. Quadratic primes
 #
-Description: Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0. 
-Algorithm: Quadratic formula and prime checking 
-Time Complexity: O(n^2 log n) 
+Description: Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
+Algorithm: Quadratic formula and prime checking
+Time Complexity: O(n^2 log n)
 Space Complexity: O(n)
 """
 def is_prime(n):
@@ -741,9 +741,9 @@ print(result)  # Output: -59231
 #
 28. Number spiral diagonals
 #
-Description: Find the sum of the numbers on the diagonals in a 1001 by 1001 spiral. 
-Algorithm: Arithmetic series 
-Time Complexity: O(1) 
+Description: Find the sum of the numbers on the diagonals in a 1001 by 1001 spiral.
+Algorithm: Arithmetic series
+Time Complexity: O(1)
 Space Complexity: O(1)
 """
 def number_spiral_diagonals(size):
@@ -763,9 +763,9 @@ print(result)  # Output: 669171001
 #
 29. Distinct powers
 #
-Description: Find the number of distinct terms in the sequence generated by a^b for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100. 
-Algorithm: Nested loops with set 
-Time Complexity: O(n^2) 
+Description: Find the number of distinct terms in the sequence generated by a^b for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100.
+Algorithm: Nested loops with set
+Time Complexity: O(n^2)
 Space Complexity: O(n^2)
 """
 def distinct_powers(limit):
@@ -779,9 +779,9 @@ print(result)  # Output: 9183
 #
 30. Digit fifth powers
 #
-Description: Find the sum of all the numbers that can be written as the sum of fifth powers of their digits. 
-Algorithm: Brute force with digit power sums 
-Time Complexity: O(n) 
+Description: Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+Algorithm: Brute force with digit power sums
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def digit_fifth_powers(power):
@@ -795,9 +795,9 @@ print(result)  # Output: 443839
 #
 31. Coin sums
 #
-Description: Find the number of different ways to make £2 using any number of coins. 
-Algorithm: Dynamic programming (coin change) 
-Time Complexity: O(nm) 
+Description: Find the number of different ways to make £2 using any number of coins.
+Algorithm: Dynamic programming (coin change)
+Time Complexity: O(nm)
 Space Complexity: O(n)
 """
 def coin_sums(total, coins):
@@ -815,9 +815,9 @@ print(result)  # Output: 73682
 #
 32. Pandigital products
 #
-Description: Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital. 
-Algorithm: Permutations and products 
-Time Complexity: O(n!) 
+Description: Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.
+Algorithm: Permutations and products
+Time Complexity: O(n!)
 Space Complexity: O(n)
 """
 from itertools import permutations
@@ -846,9 +846,9 @@ print(result)  # Output: 45228
 #
 33. Digit cancelling fractions
 #
-Description: Find the product of the four fractions less than one in value, with two-digit numerator and denominator, which are digit cancelling fractions. 
-Algorithm: Brute force with digit manipulation 
-Time Complexity: O(n^2) 
+Description: Find the product of the four fractions less than one in value, with two-digit numerator and denominator, which are digit cancelling fractions.
+Algorithm: Brute force with digit manipulation
+Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
 from fractions import Fraction
@@ -876,9 +876,9 @@ print(result)  # Output: 100
 #
 34. Digit factorials
 #
-Description: Find the sum of all numbers which are equal to the sum of the factorial of their digits. 
-Algorithm: Brute force with factorial sums 
-Time Complexity: O(n) 
+Description: Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+Algorithm: Brute force with factorial sums
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 from math import factorial
@@ -894,9 +894,9 @@ print(result)  # Output: 40730
 #
 35. Circular primes
 #
-Description: Find the number of circular primes below one million. 
-Algorithm: Prime generation and rotation 
-Time Complexity: O(n log log n) 
+Description: Find the number of circular primes below one million.
+Algorithm: Prime generation and rotation
+Time Complexity: O(n log log n)
 Space Complexity: O(n)
 """
 def is_prime(n):
@@ -926,9 +926,9 @@ print(result)  # Output: 55
 #
 36. Double-base palindromes
 #
-Description: Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2. 
-Algorithm: Palindrome check in two bases 
-Time Complexity: O(n log n) 
+Description: Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+Algorithm: Palindrome check in two bases
+Time Complexity: O(n log n)
 Space Complexity: O(1)
 """
 def is_palindrome(s):
@@ -944,9 +944,9 @@ print(result)  # Output: 872187
 #
 37. Truncatable primes
 #
-Description: Find the sum of the only eleven primes that are both truncatable from left to right and right to left. 
-Algorithm: Prime checking and truncation 
-Time Complexity: O(n log log n) 
+Description: Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+Algorithm: Prime checking and truncation
+Time Complexity: O(n log log n)
 Space Complexity: O(n)
 """
 def truncations(n):
@@ -974,9 +974,9 @@ print(result)  # Output: 748317
 #
 38. Pandigital multiples
 #
-Description: Find the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2,...,n) where n > 1. 
-Algorithm: String concatenation and permutation check 
-Time Complexity: O(n!) 
+Description: Find the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2,...,n) where n > 1.
+Algorithm: String concatenation and permutation check
+Time Complexity: O(n!)
 Space Complexity: O(n)
 """
 def is_pandigital(n):
@@ -1002,9 +1002,9 @@ print(result)  # Output: 932718654
 #
 39. Integer right triangles
 #
-Description: Find the number of solutions for p ≤ 1000 such that the number of right angle triangles with integral length sides is maximized. 
-Algorithm: Brute force with perimeter check 
-Time Complexity: O(n^2) 
+Description: Find the number of solutions for p ≤ 1000 such that the number of right angle triangles with integral length sides is maximized.
+Algorithm: Brute force with perimeter check
+Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
 def right_angle_triangles(limit):
@@ -1027,9 +1027,9 @@ print(result)  # Output: 840
 #
 40. Champernowne's constant
 #
-Description: Find the value of the expression for d_1 * d_10 * d_100 * d_1000 * d_10000 * d_100000 * d_1000000. 
-Algorithm: Direct digit extraction 
-Time Complexity: O(n) 
+Description: Find the value of the expression for d_1 * d_10 * d_100 * d_1000 * d_10000 * d_100000 * d_1000000.
+Algorithm: Direct digit extraction
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def champernowne_constant():
@@ -1046,9 +1046,9 @@ print(result)  # Output: 210
 #
 41. Pandigital prime
 #
-Description: Find the largest n-digit pandigital prime. 
-Algorithm: Permutations and prime checking 
-Time Complexity: O(n!) 
+Description: Find the largest n-digit pandigital prime.
+Algorithm: Permutations and prime checking
+Time Complexity: O(n!)
 Space Complexity: O(n)
 """
 from itertools import permutations
@@ -1067,9 +1067,9 @@ print(result)  # Output: 7652413
 #
 42. Coded triangle numbers
 #
-Description: Find the number of triangle words in the given text file. 
-Algorithm: Triangle number generation and check 
-Time Complexity: O(n) 
+Description: Find the number of triangle words in the given text file.
+Algorithm: Triangle number generation and check
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def is_triangle_number(n):
@@ -1093,9 +1093,9 @@ print(result)  # Output depends on the words
 #
 43. Sub-string divisibility
 #
-Description: Find the sum of all 0 to 9 pandigital numbers with specific divisibility properties. 
-Algorithm: Permutations and divisibility check 
-Time Complexity: O(n!) 
+Description: Find the sum of all 0 to 9 pandigital numbers with specific divisibility properties.
+Algorithm: Permutations and divisibility check
+Time Complexity: O(n!)
 Space Complexity: O(n)
 """
 def has_substring_divisibility(n):
@@ -1118,9 +1118,9 @@ print(result)  # Output: 16695334890
 #
 44. Pentagon numbers
 #
-Description: Find the pair of pentagonal numbers for which their sum and difference are pentagonal and D is minimized. 
-Algorithm: Brute force with pentagonal number check 
-Time Complexity: O(n^2) 
+Description: Find the pair of pentagonal numbers for which their sum and difference are pentagonal and D is minimized.
+Algorithm: Brute force with pentagonal number check
+Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
 def is_pentagonal(n):
@@ -1141,9 +1141,9 @@ def pentagonal_numbers():
 #
 45. Triangular, pentagonal, and hexagonal
 #
-Description: Find the next triangle number that is also pentagonal and hexagonal after 40755. 
-Algorithm: Direct number generation and check 
-Time Complexity: O(n) 
+Description: Find the next triangle number that is also pentagonal and hexagonal after 40755.
+Algorithm: Direct number generation and check
+Time Complexity: O(n)
 Space Complexity: O(1)
 """
 def is_pentagonal(n):
@@ -1169,9 +1169,9 @@ print(result)  # Output: 1533776805
 #
 46. Goldbach's other conjecture
 #
-Description: Find the smallest odd composite that cannot be written as the sum of a prime and twice a square. 
-Algorithm: Prime and square number check 
-Time Complexity: O(n log log n) 
+Description: Find the smallest odd composite that cannot be written as the sum of a prime and twice a square.
+Algorithm: Prime and square number check
+Time Complexity: O(n log log n)
 Space Complexity: O(n)
 """
 def is_prime(n):
@@ -1207,9 +1207,9 @@ print(result)  # Output: 5777
 #
 47. Distinct primes factors
 #
-Description: Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers? 
-Algorithm: Prime factorization with array 
-Time Complexity: O(n log n) 
+Description: Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?
+Algorithm: Prime factorization with array
+Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
 def distinct_prime_factors(n, limit):
@@ -1234,9 +1234,9 @@ print(result)  # Output: 134043
 #
 48. Self powers
 #
-Description: Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000. 
-Algorithm: Direct summation with modulus 
-Time Complexity: O(n) Space 
+Description: Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
+Algorithm: Direct summation with modulus
+Time Complexity: O(n) Space
 Complexity: O(1)
 """
 def self_powers(limit, digits):
@@ -1250,8 +1250,8 @@ print(result)  # Output: 9110846700
 #
 49. Prime permutations
 #
-Description: Find the 12-digit number formed by concatenating the three terms in the arithmetic sequence of four-digit primes where each term is a permutation of the others. Algorithm: Prime generation and permutation check 
-Time Complexity: O(n log log n) 
+Description: Find the 12-digit number formed by concatenating the three terms in the arithmetic sequence of four-digit primes where each term is a permutation of the others. Algorithm: Prime generation and permutation check
+Time Complexity: O(n log log n)
 Space Complexity: O(n)
 """
 from itertools import permutations
@@ -1284,9 +1284,9 @@ print(result)  # Output: 296962999629
 #
 50. Consecutive prime sum
 #
-Description: Find the prime below one-million that can be written as the sum of the most consecutive primes. 
-Algorithm: Prime summation and sliding window 
-Time Complexity: O(n^2) 
+Description: Find the prime below one-million that can be written as the sum of the most consecutive primes.
+Algorithm: Prime summation and sliding window
+Time Complexity: O(n^2)
 Space Complexity: O(n)
 """
 
@@ -1323,9 +1323,9 @@ def consecutive_prime_sum(limit):
 
 # List - Ordered collection of items, supports indexing, slicing, and iteration.
     """
-    Quick Sort: A fast, divide-and-conquer algorithm that selects a pivot element and partitions the array into subarrays. 
+    Quick Sort: A fast, divide-and-conquer algorithm that selects a pivot element and partitions the array into subarrays.
     Average case O(n log n), worst case O(n^2), space complexity O(log n).
-    """ 
+    """
 
     def quick_sort(arr):
         if len(arr) <= 1:
@@ -1338,7 +1338,7 @@ def consecutive_prime_sum(limit):
 
     # Regular Implementation
     arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    sorted_arr = quick_sort(arr) 
+    sorted_arr = quick_sort(arr)
     print(sorted_arr)  # Output: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
     # Best Practices Implementation: Using a cached version for repeated sorting
@@ -1355,11 +1355,11 @@ def consecutive_prime_sum(limit):
         return quick_sort_cached(tuple(left)) + tuple(middle) + quick_sort_cached(tuple(right))
 
     arr = tuple([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
-    sorted_arr = quick_sort_cached(arr) 
+    sorted_arr = quick_sort_cached(arr)
     print(sorted_arr)  # Output: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
     """
-    Tim Sort: A hybrid sorting algorithm derived from merge sort and insertion sort, used by Python's built-in sorted() function. 
+    Tim Sort: A hybrid sorting algorithm derived from merge sort and insertion sort, used by Python's built-in sorted() function.
     Time complexity O(n log n), space complexity O(n).
     """
 
@@ -1378,10 +1378,10 @@ def consecutive_prime_sum(limit):
     print(sorted_large_arr[:10])  # Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-# Tuples - Immutable ordered collection of items  
+# Tuples - Immutable ordered collection of items
 
     """
-    Hashing: Often used as keys in dictionaries because they are immutable. 
+    Hashing: Often used as keys in dictionaries because they are immutable.
     O(1) average, O(n) worst-case time complexity for lookup, O(1) space complexity.
     """
 
@@ -1406,9 +1406,9 @@ def consecutive_prime_sum(limit):
 # Dictionaries - Key-value pairs, efficient lookup, insertion, and deletion.
 
     """
-    Hashing: Dictionary operations (insert, lookup) 
+    Hashing: Dictionary operations (insert, lookup)
     typically O(1) average case due to hash tables, O(n) worst-case time complexity, O(n) space complexity.
-    """ 
+    """
 
     phone_book = {"Alice": "123-456-7890", "Bob": "987-654-3210"}
     print(phone_book)  # Output: {'Alice': '123-456-7890', 'Bob': '987-654-3210'}
@@ -1437,7 +1437,7 @@ def consecutive_prime_sum(limit):
 
     """
     Set Operations Example
-    """    
+    """
 
     Set Operations Example
     set_a = {1, 2, 3, 4}
@@ -1459,7 +1459,7 @@ def consecutive_prime_sum(limit):
     print(intersection)  # Output: {3, 4}
     print(difference)  # Output: {1, 2}
 
-      
+
 
 '''
 ## Terms
@@ -1514,5 +1514,4 @@ def consecutive_prime_sum(limit):
     49. Pandigital Number: A number that contains each digit (from 1 to 9 or from 0 to 9) exactly once.
     50. Square Root: A value that, when multiplied by itself, gives the original number.
 
-''' 
-
+'''

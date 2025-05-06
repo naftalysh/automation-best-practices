@@ -13,11 +13,11 @@ Our monitoring system consists of several key components:
 - **Implementation**:
   ```yaml
   name: API Health Check
-  
+
   on:
     schedule:
       - cron: '*/15 * * * *'  # Every 15 minutes
-  
+
   jobs:
     health_check:
       runs-on: ubuntu-latest
@@ -50,11 +50,11 @@ Our monitoring system consists of several key components:
 - **Implementation**:
   ```yaml
   name: API Performance Check
-  
+
   on:
     schedule:
       - cron: '0 */3 * * *'  # Every 3 hours
-  
+
   jobs:
     performance_check:
       runs-on: ubuntu-latest
@@ -80,11 +80,11 @@ Our monitoring system consists of several key components:
   - Anomaly detection
   ```yaml
   name: Error Log Analysis
-  
+
   on:
     schedule:
       - cron: '*/30 * * * *'  # Every 30 minutes
-  
+
   jobs:
     analyze_logs:
       runs-on: ubuntu-latest
@@ -113,11 +113,11 @@ Our monitoring system consists of several key components:
 - **Implementation**:
   ```yaml
   name: SLA Compliance Report
-  
+
   on:
     schedule:
       - cron: '0 0 * * 1'  # Weekly on Monday at midnight
-  
+
   jobs:
     sla_report:
       runs-on: ubuntu-latest
@@ -183,7 +183,7 @@ jobs:
           else
             echo "channels=slack" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Send Slack notification
         if: contains(steps.channels.outputs.channels, 'slack')
         uses: slackapi/slack-github-action@v1.23.0
@@ -210,7 +210,7 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      
+
       - name: Send email notification
         if: contains(steps.channels.outputs.channels, 'email')
         uses: dawidd6/action-send-mail@v3
@@ -223,7 +223,7 @@ jobs:
           body: ${{ inputs.alert_details }}
           to: ${{ secrets.ALERT_EMAIL_RECIPIENTS }}
           from: API Monitoring System
-      
+
       - name: Create GitHub issue
         if: inputs.alert_level == 'error' || inputs.alert_level == 'critical'
         uses: actions/github-script@v6

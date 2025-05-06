@@ -1,6 +1,6 @@
 # GitHub Actions Web API Automation Solution - Enhanced Version
 
-This is the enhanced version of the GitHub Actions Web API Automation Solution with additional components and improvements 
+This is the enhanced version of the GitHub Actions Web API Automation Solution with additional components and improvements
 to make it more complete and robust.
 
 
@@ -39,7 +39,7 @@ github_actions_web_api/
 │   ├── implementation_guide.md        # Implementation guide
 │   ├── usage_guide.md                 # Usage guide
 │   ├── best_practices.md              # Best practices document
-|   └── improvements_documentation.md  # Documentation of enhancements 
+|   └── improvements_documentation.md  # Documentation of enhancements
 └── README.md                          # This file
 ```
 

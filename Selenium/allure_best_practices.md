@@ -145,4 +145,3 @@ jobs:
 
 ## Conclusion
 Following these best practices will help you create detailed, organized, and useful Allure reports for your Python tests. Allure's flexibility and powerful features make it an excellent choice for enhancing your test reporting.
-

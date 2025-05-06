@@ -4,7 +4,7 @@
    conda create --name selenium python=3.10 -y
 
    Fallback:
-    a. Deactivate the environment (if it is currently activated): 
+    a. Deactivate the environment (if it is currently activated):
        conda deactivate
 
     b. Delete the environment:
@@ -13,8 +13,8 @@
 2. activate selenium environment
    conda activate selenium
 
-3. pip install -r requirements.txt 
-   
+3. pip install -r requirements.txt
+
    If wanting to automate the y answer:
    powershell -Command "echo y | pip install -r requirements.txt"
 
@@ -25,8 +25,8 @@
    pip freeze > all-requirements.txt
 
 
-Misc - 
-1. Update pip and setuptools 
+Misc -
+1. Update pip and setuptools
    python.exe -m pip install --upgrade pip setuptools
 
 
@@ -39,4 +39,3 @@ Misc -
       conda --version
    f. Update Anaconda
       conda update conda && conda update anaconda
-

@@ -40,7 +40,7 @@ router.get('/db', async (req, res) => {
     // Check if mongoose is connected
     const mongoose = require('mongoose');
     const isConnected = mongoose.connection.readyState === 1;
-    
+
     if (isConnected) {
       res.status(200).json({
         status: 'healthy',

@@ -42,6 +42,3 @@ Open a browser and navigate to http://localhost:4444/grid/console. You should se
 
 
 Running Your Test
-
-
-

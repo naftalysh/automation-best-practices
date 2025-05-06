@@ -2513,5 +2513,3 @@ Markdown to PDF:
 - **StackEdit:** https://stackedit.io/
     o Import your .md file.
     o Go to File > Export as PDF.
-
-

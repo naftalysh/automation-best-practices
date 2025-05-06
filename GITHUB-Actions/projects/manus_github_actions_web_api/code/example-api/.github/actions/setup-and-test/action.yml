@@ -26,16 +26,16 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-    
+
     - name: Start MongoDB ${{ inputs.mongodb-version }}
       uses: supercharge/mongodb-github-action@1.8.0
       with:
         mongodb-version: ${{ inputs.mongodb-version }}
-    
+
     - name: Install dependencies
       shell: bash
       run: npm ci
-    
+
     - name: Create test environment
       shell: bash
       run: |
@@ -44,17 +44,17 @@ runs:
         echo "MONGO_URI=mongodb://localhost:27017/example-api-test" >> .env
         echo "JWT_SECRET=test_secret_key" >> .env
         echo "JWT_EXPIRE=1d" >> .env
-    
+
     - name: Run linting
       if: inputs.run-lint == 'true'
       shell: bash
       run: npm run lint || echo "Linting issues found"
-    
+
     - name: Run tests
       if: inputs.run-tests == 'true'
       shell: bash
       run: npm test
-    
+
     - name: Report setup status
       shell: bash
       run: |

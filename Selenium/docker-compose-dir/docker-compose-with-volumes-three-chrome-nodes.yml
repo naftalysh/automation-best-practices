@@ -183,7 +183,7 @@ volumes:
 #    run the command with the --volumes flag:
 #    $ docker-compose down --volumes
 #
-# 3. The --volumes option will delete all the data stored in the volumes, 
+# 3. The --volumes option will delete all the data stored in the volumes,
 #    so use this option only if you do not need to retain the logs or screenshots.
 
 # To use specific yml file, use the below format:
@@ -197,7 +197,7 @@ volumes:
 #   Ex: For Fedora:
 #   sudo dnf install podman python3-pip
 #   pip3 install podman-compose
-# 
+#
 # Workarounds for podman-compose who doesn't know how to relate to relative volume paths:
 # 1. Pre-create Directories:
 #    Manually create the directories before running podman-compose. This ensures that Podman has the correct directories available for mounting.

@@ -21,31 +21,31 @@ jobs:
   validate_migrations:
     name: Validate Migrations
     runs-on: ubuntu-latest
-    
+
     services:
       mongodb:
         image: mongo:4.4
         ports:
           - 27017:27017
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Create test database
         run: |
           echo "Creating test database for migration validation"
           mongosh --eval "db.createCollection('test')" mongodb://localhost:27017/migration-test
-      
+
       - name: Validate migrations
         run: |
           echo "Validating database migrations..."
@@ -63,26 +63,26 @@ jobs:
     needs: validate_migrations
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment || 'development' }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Create backup
         run: |
           echo "Creating database backup before running migrations..."
           # In a real scenario, this would create a database backup
           echo "Backup created at $(date)"
-      
+
       - name: Run migrations
         run: |
           echo "Running migrations on ${{ github.event.inputs.environment || 'development' }} environment..."
@@ -93,17 +93,17 @@ jobs:
           echo "Migrations completed successfully!"
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
-      
+
       - name: Verify migrations
         run: |
           echo "Verifying migrations..."
           # In a real scenario, this would verify the migrations were applied correctly
           echo "All migrations verified!"
-      
+
       - name: Notify on migration completion
         run: |
           echo "Database migrations completed successfully on ${{ github.event.inputs.environment || 'development' }} environment!"
-      
+
       - name: Rollback on failure
         if: failure()
         run: |

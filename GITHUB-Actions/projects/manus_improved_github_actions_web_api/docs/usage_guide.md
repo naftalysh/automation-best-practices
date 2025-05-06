@@ -291,7 +291,7 @@ To add a new workflow:
        steps:
          - name: Checkout code
            uses: actions/checkout@v3
-         
+
          # Add your steps here
    ```
 3. Commit and push the file
@@ -310,7 +310,7 @@ To create a custom composite action:
        description: 'Input description'
        required: false
        default: 'default value'
-   
+
    runs:
      using: "composite"
      steps:

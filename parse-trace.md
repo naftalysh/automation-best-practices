@@ -15,10 +15,10 @@ map(select(.params.BeforeOrAfter == "Before" or .params.BeforeOrAfter == "After"
 group_by(.functionName)[] |
 {
   functionName: .[0].functionName,
-  records: 
+  records:
     map(
       select(.params.BeforeOrAfter == "Before" or .params.BeforeOrAfter == "After") |
-      { 
+      {
         BeforeOrAfter: .params.BeforeOrAfter,
         timestamp: .timestamp
       }
@@ -29,16 +29,16 @@ group_by(.functionName)[] |
 
 # create a csv file with specific fields
 cat trace.json | jq -r '
-  .[] 
+  .[]
   | [
-      .functionName, 
-      .timestamp, 
-      .params.ApplicationName, 
-      .params.BeforeOrAfter, 
-      .params.componentName, 
-      .params.username, 
+      .functionName,
+      .timestamp,
+      .params.ApplicationName,
+      .params.BeforeOrAfter,
+      .params.componentName,
+      .params.username,
       .params.usernamespace
-    ] 
+    ]
   | @csv' > trace.csv
 
 
@@ -128,7 +128,7 @@ jq -s '
 
 # Now sumnmerize diff per ApplicationName and functionName
 # summerize-diffs-grouped-by-ApplicationName-and-functionName.json
-jq ' 
+jq '
   group_by(.ApplicationName, .functionName)
   | map({
       ApplicationName: .[0].ApplicationName,
@@ -167,4 +167,3 @@ jq -r '
   | map([.ApplicationName, .functionName, .total_diff])
   | .[] | @csv
 ' list-of-diffs-grouped-by-ApplicationName-and-functionName.json
-

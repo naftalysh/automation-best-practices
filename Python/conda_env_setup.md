@@ -57,5 +57,3 @@ e. To log both standard output (stdout) and error output (stderr) to the same fi
 
     CMD:
     conda create --name ml_env_copy --clone ml_env > output.txt 2>&1
-
-

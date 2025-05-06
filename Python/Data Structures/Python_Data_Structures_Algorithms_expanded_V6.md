@@ -74,7 +74,7 @@
 
         # Regular Implementation
         arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-        sorted_arr = quick_sort(arr) 
+        sorted_arr = quick_sort(arr)
         print(sorted_arr)  # Output: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         # Best Practices Implementation: Using a cached version for repeated sorting
@@ -119,7 +119,7 @@
             left = merge_sort(arr[:mid])
             right = merge_sort(arr[mid:])
             return merge(left, right)
-        
+
         def merge(left, right):
             result = []
             i = j = 0
@@ -759,7 +759,7 @@
       dq.append(4)
       print(dq)  # Output: deque([0, 1, 2, 3, 4])
       ```
-    </details>    
+    </details>
 
 ## 3. Array Module
 
@@ -942,10 +942,10 @@
       ```python
       # Define a dictionary with 1,000,000 'name' entries all set to 'Alice' and 'age' entries all set to 25
       data = {'name': ['Alice']*1000000, 'age': [25]*1000000}
-      
+
       # Create a DataFrame from the dictionary
       df = pd.DataFrame(data)
-      
+
       # Group by the 'age' column and count the size of each group
       grouped = df.groupby('age').size()
 
@@ -1671,7 +1671,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -2050,7 +2050,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -2236,6 +2236,3 @@ print(df)
 # 0    Alice   25
 # 1      Bob   30
 # 2  Charlie   35
-
-
-

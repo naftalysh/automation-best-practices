@@ -1,4 +1,4 @@
-## GPG 
+## GPG
 Signing a commit with GPG key
 
 # Create my GPG key
@@ -10,12 +10,12 @@ oc whoami --show-console # show console
 
 
 # Getting DOCKER_CONFIG_JSON procedure
-export REGISTRY_AUTH_FILE=/home/$USER/auth.json  
+export REGISTRY_AUTH_FILE=/home/$USER/auth.json
 REGISTRY_AUTH_FILE=$REGISTRY_AUTH_FILE docker login docker.io -u $USER
 DOCKER_CONFIG_JSON=$(cat $REGISTRY_AUTH_FILE | base64 -w 0)
 
 # Getting QUAY_CONFIG_JSON procedure
-export REGISTRY_AUTH_FILE=/home/$USER/auth.json  
+export REGISTRY_AUTH_FILE=/home/$USER/auth.json
 REGISTRY_AUTH_FILE=$REGISTRY_AUTH_FILE podman login quay.io -u $USER
 QUAY_CONFIG_JSON=$(cat $REGISTRY_AUTH_FILE | base64 -w 0)
 echo "QUAY_CONFIG_JSON=$QUAY_CONFIG_JSON"
@@ -237,7 +237,7 @@ find / -type f -name '\*.sh' -exec grep -l 'code' {} +
 find / -type f -name '_code_.sh'
 
 # Exclude erronuous lines
-find / -type f -name '_code_.sh' 2>&1 | grep -v 'Permission denied\|Invalid argument'  
+find / -type f -name '_code_.sh' 2>&1 | grep -v 'Permission denied\|Invalid argument'
 Or
 find / -type f -name '\*code.sh' 2>&1 | grep -v 'Permission denied\|Invalid argument'
 
@@ -306,7 +306,7 @@ Web link: <https://vinamra-jain.medium.com/publishing-tekton-Entity2-as-bundles-
 
 3. Extract contents of a pipeline within the Bundle
    quay.io/organization/repository-name:tag-name pipeline pipeline-name -o yaml
-   
+
 4. And if you want to install the Task on cluster then you can just pipe it with kubectl :
    tkn bundle list quay.io/organization/repository-name:tag-name task task-name -o yaml | kubectl create -f -
    --> task.tekton.dev/task-name created
@@ -578,7 +578,7 @@ command terminated with exit code 28
 # In OpenShift, you can get the namespace, service name, and type of services
 # using the oc command-line tool or the OpenShift web console
 Here are the steps to get the namespace, service name, and type of services using the oc command-line tool:
-oc get services --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.type}{"\n"}{end}' 
+oc get services --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.type}{"\n"}{end}'
 command to get the namespace, service name and type of all services in your cluster across all namespaces.
 You can also use oc get services --all-namespaces -o wide command which will give you more information about the services including the namespace, service name and type.
 
@@ -596,7 +596,7 @@ Please note that, the above commands will give you the information about all ser
 Here are the steps to get the IP address, namespace, service name, and type of services using the oc command-line tool:
 
 Run
-oc get services --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.clusterIP}{"\t"}{.spec.type}{"\n"}{end}' 
+oc get services --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.clusterIP}{"\t"}{.spec.type}{"\n"}{end}'
 command to get the IP address, namespace, service name and type of all services in your cluster across all namespaces
 
 # You can align the display of the IP address, namespace, service name
@@ -801,7 +801,7 @@ stddev(example_metric)
 quantile(0.95, example_metric)
 
 
-# statistics 
+# statistics
 avg_over_time(example_metric[5m])
 max_over_time(example_metric[1h])
 min_over_time(example_metric[30m])
@@ -874,8 +874,8 @@ label_replace(max by (node) (kube_node_role{role=~".+"}), "instance", "$1", "nod
 
 ## scripts
 # deleteQuayRobots
-python ./deleteQuayRobots.py $QUAY_TOKEN nafta_org "load"  
-python ./deleteQuayRobots.py $QUAY_TOKEN nafta_org "nafta_org+load"  
+python ./deleteQuayRobots.py $QUAY_TOKEN nafta_org "load"
+python ./deleteQuayRobots.py $QUAY_TOKEN nafta_org "nafta_org+load"
 python ./deleteQuayRobots.py $QUAY_OAUTH_TOKEN nafta_org "nafta_org+load"
 
 
@@ -994,19 +994,19 @@ curl -H "Accept: application/vnd.github.v3+json" \                              
 "https://api.github.com/repos/organization-name/project-name/pulls/pr-number/commits"  | jq '[.[] | {sha: .sha, date: .commit.committer.date}] | sort_by(.date) | reverse'
 
 
-## JQ - traverse and print field hierarical names and values     
+## JQ - traverse and print field hierarical names and values
 jq --raw-output '
-  paths(scalars) as $p | 
-  {path: $p | map(tostring) | join("."), value: getpath($p)} | 
+  paths(scalars) as $p |
+  {path: $p | map(tostring) | join("."), value: getpath($p)} |
   "\(.path): \(.value)"
 ' test.json
 
 
 ## JQ - print field names values with header containing the field names
 cat test.json | jq --raw-output '
-["field1", "field2", 
-"field3", "field4", "field5", 
-"field6"], 
+["field1", "field2",
+"field3", "field4", "field5",
+"field6"],
 [
     .field1,
     .field2,
@@ -1029,9 +1029,9 @@ jq '{Comment: "Batch delete of records", Changes: [.ResourceRecordSets[] | selec
 
 
 ## Count the number of DNS records in the output.json file
-jq '.Changes | length' delete-dns-records.json 
+jq '.Changes | length' delete-dns-records.json
 
-## actually delete the DNS records of the "ChangeBatch" records in delete-d.json 
+## actually delete the DNS records of the "ChangeBatch" records in delete-d.json
 aws route53 change-resource-record-sets --hosted-zone-id /hostedzone/Z0123456789 --change-batch file://delete-dns-records.json
 
 receiving a dispaly like the below:
@@ -1044,7 +1044,7 @@ receiving a dispaly like the below:
     }
 }
 
-## To check the current status of your change request, you can use the following AWS CLI command, 
+## To check the current status of your change request, you can use the following AWS CLI command,
 aws route53 get-change --id C123456789
 
 seeing "Status": "INSYNC" is the goal when you're making DNS changes in AWS Route 53, as it means your changes have been fully applied.
@@ -1125,7 +1125,7 @@ open-webui serve
       And then bottstrap open webUI
 
    Option 2: Modify System Proxy Behavior
-      Set up a system-wide proxy: Modify /etc/environment (requires sudo): 
+      Set up a system-wide proxy: Modify /etc/environment (requires sudo):
       sudo nano /etc/environment
 
       Add the following lines:
@@ -1133,7 +1133,3 @@ open-webui serve
       HTTPS_PROXY="http://localhost:3002"
 
       And then bottstrap open webUI
-
-
-
-

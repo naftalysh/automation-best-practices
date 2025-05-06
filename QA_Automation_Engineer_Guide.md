@@ -8,7 +8,7 @@ This guide provides a detailed description of the skills, best practices, and te
 
 1. **Delivering Software Development Specifications**:
     - **Requirement Analysis**: Deeply understanding client needs is essential for writing effective automated test cases.
-    - **Best Practice**: Engage in early discussions with clients and developers to identify critical system requirements. Use **Behavior Driven Development (BDD)** to map requirements to tests.  
+    - **Best Practice**: Engage in early discussions with clients and developers to identify critical system requirements. Use **Behavior Driven Development (BDD)** to map requirements to tests.
     - **Resource**: [Cucumber BDD Framework](https://cucumber.io/) for mapping specifications to tests.
 
 2. **Building a Scalable Grid System**:
@@ -25,7 +25,7 @@ This guide provides a detailed description of the skills, best practices, and te
     - **Resource**: [Pytest Documentation](https://docs.pytest.org/en/6.2.x/).
 
 4. **Cloud Computing Applications and Infrastructure**:
-    - **Cloud Platforms**: Familiarity with **AWS**, **Azure**, or **Google Cloud** is essential for testing cloud-native applications. 
+    - **Cloud Platforms**: Familiarity with **AWS**, **Azure**, or **Google Cloud** is essential for testing cloud-native applications.
     - **Best Practice**: Use **infrastructure as code (IaC)** tools like **Terraform** or **Pulumi** to automate test environment setup.
     - **Example**: Automated deployment validation with **Terraform** and `terratest`: [Terraform Test Automation](https://terratest.gruntwork.io/).
     - **Resource**: [AWS CloudFormation](https://aws.amazon.com/cloudformation/) for managing infrastructure with IaC.
@@ -52,7 +52,7 @@ This guide provides a detailed description of the skills, best practices, and te
     - Containerize test environments using **Docker** to ensure consistency between local, test, and production environments.
 
 3. **Test Coverage**:
-    - Ensure comprehensive test coverage across **functional**, **integration**, **end-to-end**, and **performance** testing. 
+    - Ensure comprehensive test coverage across **functional**, **integration**, **end-to-end**, and **performance** testing.
     - Use tools like **SonarQube** or **Codecov** to measure code coverage.
 
 4. **Parallel Testing**:
@@ -171,4 +171,3 @@ spec:
 
 ## Conclusion:
 This role combines core **QA automation practices** with knowledge of **cloud computing platforms**. By following best practices in test automation, infrastructure setup, and cloud-native development, you will be able to contribute to robust, scalable, and efficient QA processes in cloud environments.
-

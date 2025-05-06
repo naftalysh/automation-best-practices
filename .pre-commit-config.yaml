@@ -1,0 +1,84 @@
+# .pre-commit-config.yaml – fast & focused
+# Pre‑commit will skip everything in the global “exclude” pattern first,
+# then run the per‑hook regex filters.
+exclude: |
+  (?x)(
+    ^\.?venv/|
+    ^\.mypy_cache/|
+    ^\.pytest_cache/|
+    ^\.tox/|
+    ^dist/|
+    ^build/|
+    ^node_modules/|
+    ^\.git/
+  )
+
+default_install_hook_types: [pre-commit]
+ci:
+  # Let pre-commit.ci bail immediately on the first failure
+  fail_fast: true
+  parallel: true
+
+repos:
+  # 🔒 Secrets scan — heavy, so run once per *push* instead of on every commit
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        stages: [pre-push]
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: "tests/.*"
+
+  # ✅ Basic file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: debug-statements
+        # Skip *.ipynb etc. to avoid long parses
+        exclude: "\\.(ipynb|pyz)$"
+
+  # ⚡ Ruff (formatter + linter in one extremely fast Rust binary)
+  #   Replaces Black + Flake8 ⇢ ~10× speed‑up on large repos :contentReference[oaicite:0]{index=0}
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.3
+    hooks:
+      # First run the linter with autofix
+      - id: ruff
+        name: ruff (lint + autofix)
+        args: ["--fix", "--exit-non-zero-on-fix"]
+        files: "\\.py$"
+      # Then verify formatting only (cheap)
+      - id: ruff-format
+        name: ruff fmt (check‑only)
+        args: ["--check"]
+        files: "\\.py$"
+
+  # 🐚 Shell scripts
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        files: "\\.sh$"
+
+  # 📑 Markdown
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        files: "\\.md$"
+        # Disable long‑line rule (MD013) – noisy & slow
+        args: ["-r", "~MD013"]
+
+  # 🐳 Dockerfile
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        stages: [pre-push]          # heavy ⇒ once per push
+        files: (?i)Dockerfile$

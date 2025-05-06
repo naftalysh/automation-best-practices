@@ -1,7 +1,7 @@
 """
 Problem Description
- 
- 
+
+
 
 Find the intersection of two sorted arrays OR in other words, given 2 sorted arrays, find all the elements which occur in both arrays.
 
@@ -49,6 +49,7 @@ Only 3 and 5 occurs in both the arrays A and B
 
 
 """
+
 
 class Solution:
     # @param A : tuple of integers

@@ -1,4 +1,4 @@
-## GPG 
+## GPG
 Signing a commit with GPG key
 
 1. Create my GPG key
@@ -32,11 +32,11 @@ GITHUB Signing my commits with my private GPG key
 
     Q2: How to remove a file from the last commit
     A2: git rm filename-to-remove
-        git commit --amend -S -s  
+        git commit --amend -S -s
         git push -f
 
 ## GIT
-# Set VS Code as Default Git Editor: 
+# Set VS Code as Default Git Editor:
 git config --global core.editor "code --wait"
 
 # Verifying the Configuration
@@ -99,7 +99,7 @@ Signed-Off-By: Naftaly Shprai <naftalysh@gmail.com>
 To revert a git add action, you can use the git reset command with the HEAD option. This will unstage the files that you have added with git add but not committed yet.
 Here are the steps to revert a git add action:
 1. Check the status of your repository using git status to see which files have been staged with git add.
-2. Use the git reset command with the HEAD option to unstage the files that you have added. For example, to unstage a single file named file1.txt, 
+2. Use the git reset command with the HEAD option to unstage the files that you have added. For example, to unstage a single file named file1.txt,
    run the command:
 
    git reset HEAD file1.txt
@@ -111,7 +111,7 @@ Here are the steps to revert a git add action:
 4. You can verify that the changes have been unstaged by running git status again.
    The files that you unstaged should be listed as "Changes not staged for commit".
 
-   Note: this will only unstage the changes you have added but not committed yet. If you have already committed the changes, 
+   Note: this will only unstage the changes you have added but not committed yet. If you have already committed the changes,
          you will need to use git revert or git reset to undo the commit.
 
 # GIT - To make git ignore the deleted files, you can use the following command:
@@ -197,22 +197,22 @@ git log --date=local --graph --decorate
 ### Best practices working with GIT
 git clone https://naftalysh:GITHUB_TOKEN@github.com/naftalysh/reponame.git repo-directory-name
 cd repo-directory-name
-git remote add upstream https://naftalysh:GITHUB_TOKEN@github.com/upstream_orgname/reponame.git  
+git remote add upstream https://naftalysh:GITHUB_TOKEN@github.com/upstream_orgname/reponame.git
 If defined upstream without credentials, we can do it below:
-git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/upstream_orgname/reponame.git  
+git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/upstream_orgname/reponame.git
 
 
-Ex:   git remote add upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git  
-      git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git  
-      git remote set-url origin https://naftalysh:GITHUB_TOKEN@github.com/naftalysh/soc-simulation-project.git  
+Ex:   git remote add upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git
+      git remote set-url upstream https://naftalysh:GITHUB_TOKEN@github.com/naftalysh-org/soc-simulation-project.git
+      git remote set-url origin https://naftalysh:GITHUB_TOKEN@github.com/naftalysh/soc-simulation-project.git
 
       git remote add upstream https://naftalysh:$GITHUB_TOKEN@coleam00/bolt.new-any-llm.git
       git remote set-url upstream https://naftalysh:$GITHUB_TOKEN@coleam00/bolt.new-any-llm.git
       git remote set-url origin https://naftalysh:$GITHUB_TOKEN@github.com/naftalysh/bolt.new-any-llm.git
 
-          
+
 # if main branch is called master then we use "master" else "main"
-# Rebase 
+# Rebase
 git checkout master && git pull upstream master && git push origin master
 
 # When creating a new branch for a new task
@@ -368,7 +368,7 @@ git diff localBranch remoteRepo/remoteBranch
 git fetch upstream main
 git rev-list --count HEAD..upstream/main
 
-1. Remove selenium-drivers from the Last Commit 
+1. Remove selenium-drivers from the Last Commit
 ## If you just committed but haven't pushed yet, use:
    git reset --soft HEAD~1
    % This undoes the last commit but keeps the changes staged. Now, remove the folder from staging:
@@ -400,7 +400,7 @@ git rev-list --count HEAD..upstream/main
 
 3. Verify That selenium-drivers is No Longer Tracked
    % Run:
-   git ls-files | grep selenium-drivers 
+   git ls-files | grep selenium-drivers
    or for windows CMD
    git ls-files | findstr selenium-drivers
 
@@ -543,7 +543,7 @@ To have the same GitHub repository available in your **upstream organization** (
 
 ---
 
-### **Option 1: Transfer Repository to Organization**  
+### **Option 1: Transfer Repository to Organization**
 (You **move** the repository from your personal account to the organization)
 
 #### When to use:
@@ -591,4 +591,255 @@ To have the same GitHub repository available in your **upstream organization** (
 
 ---
 
-Let me know if you want to set it up to automatically sync between the forks, or need help configuring remotes.
+## ✅ Goal
+Force main in naftalysh-org/github_actions_web_api
+⬅️ to match the contents and history of update in naftalysh/github_actions_web_api
+
+
+## ✅ Correct Workflow
+
+### 1. Navigate to the target repo (organization repo directory)
+
+You need to **clone** or **go into** the existing local clone of the organization repo:
+
+```bash
+cd C:\tmp
+git clone https://github.com/naftalysh-org/github_actions_web_api.git
+cd github_actions_web_api
+```
+
+Now you're inside the Git repository for `naftalysh-org/github_actions_web_api`.
+
+---
+
+### 2. Add your personal repo as a remote
+
+```bash
+git remote add personal https://github.com/naftalysh/github_actions_web_api.git
+```
+
+✅ This will now work because you're inside a valid `.git` repo.
+
+---
+
+### 3. Proceed with syncing `main` to `update` from your personal repo
+
+```bash
+git fetch personal update
+git checkout main
+git reset --hard personal/update
+git push origin main --force
+```
+
+---
+
+## 🛡 Optional: Backup main before force-pushing
+If you want to keep a tag of the old main state:
+
+```bash
+git tag backup-main-$(date +%Y%m%d)
+git push origin backup-main-$(date +%Y%m%d)
+```
+
+
+Absolutely! Below is the **final, robust, and updated procedure** for setting up a Git pre-commit mechanism with the `pre-commit` framework, including **safe installation of `detect-secrets` using `pipx`** to comply with modern Ubuntu and WSL environments (PEP 668 restrictions).
+
+---
+
+# ✅ Git Pre-commit Hook Setup with Secrets Detection (Ubuntu / WSL Friendly)
+
+---
+
+## 📌 What is `pre-commit`?
+
+[`pre-commit`](https://pre-commit.com) is a framework to manage Git hooks like `pre-commit`, `pre-push`, etc.
+It helps prevent issues **before they reach the repository**, such as secrets, broken formatting, or syntax errors.
+
+---
+
+## 🧠 Why Use `pre-commit` Over Manual Hooks?
+
+| Feature                            | Manual `.git/hooks/pre-commit` | `pre-commit` Framework             |
+|-----------------------------------|--------------------------------|------------------------------------|
+| Portable & team-shareable         | ❌ No                          | ✅ Yes (versioned in the repo)     |
+| Built-in secrets detection        | ❌ No                          | ✅ Yes (with `detect-secrets`)     |
+| Multi-language support            | ❌ Shell-only                 | ✅ Python, JS, Shell, Docker, etc. |
+| Autoformatting / Linting          | ❌ Must write scripts         | ✅ Plug & play                      |
+| Modern OS compatibility (WSL)     | ❌ Manual only                | ✅ Yes, supports `pipx` or `venv`  |
+
+---
+
+## 🛠️ Full Setup Instructions
+
+---
+
+### 1️⃣ Install `pre-commit` Framework
+
+```bash
+sudo apt update
+sudo apt install pre-commit
+```
+
+---
+
+### 2️⃣ Navigate to Your Git Repository
+
+```bash
+cd path/to/your-git-repo
+```
+
+---
+
+### 3️⃣ Create a `.pre-commit-config.yaml` File (Best Practices)
+
+```yaml
+repos:
+  # 🔐 Secret detection with baseline
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: 'tests/.*'
+
+  # ✅ General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: debug-statements
+
+  # 🐍 Python formatter
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+
+  # 🧼 Python linter
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-bugbear]
+
+  # 🐚 Shell linter
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        files: \.sh$
+
+  # 📄 Markdown linter
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        files: \.md$
+
+  # 🐳 Dockerfile linter
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        files: Dockerfile
+```
+
+Save this as `.pre-commit-config.yaml` in your repo root.
+
+---
+
+### 4️⃣ Install the Git Hook
+
+```bash
+pre-commit install
+```
+
+This creates `.git/hooks/pre-commit`, which runs:
+```bash
+#!/bin/sh
+exec pre-commit run --hook-stage commit "$@"
+```
+
+---
+
+### 5️⃣ (Optional) Test All Hooks Across the Repo
+
+```bash
+pre-commit run --all-files
+```
+
+---
+
+### 6️⃣ Add a `.secrets.baseline` File for Secrets Scanning
+
+#### a. ✅ Install `pipx` (safe package installer for CLI tools)
+```bash
+sudo apt install pipx
+pipx ensurepath
+```
+
+Restart your shell if needed.
+
+#### b. ✅ Install `detect-secrets` via `pipx` (safe, isolated):
+```bash
+pipx install detect-secrets
+```
+
+#### c. ✅ Create the baseline file:
+```bash
+detect-secrets scan > .secrets.baseline
+```
+
+#### d. (Optional) Audit and confirm:
+```bash
+detect-secrets audit .secrets.baseline
+```
+
+Use `a` to accept or `r` to reject suspected secrets.
+
+#### e. ✅ Commit both config and baseline:
+```bash
+git add .pre-commit-config.yaml .secrets.baseline
+git commit -m "Add pre-commit config and secrets baseline"
+```
+
+---
+
+## 🔄 What Happens When You Commit
+
+```bash
+git commit -m "add new code"
+```
+
+The following checks are triggered automatically:
+- 🔐 Secrets scanning (`detect-secrets`)
+- ✅ JSON/YAML syntax validation
+- 🐍 Code formatting with `black`
+- 🧼 Linting with `flake8`, `shellcheck`
+- 🐳 Dockerfile best-practices
+
+If anything fails, the commit is **blocked**.
+
+---
+
+## 📋 Summary Checklist
+
+| Task                                    | Command or File                                  | Done? |
+|----------------------------------------|--------------------------------------------------|-------|
+| Install `pre-commit`                   | `sudo apt install pre-commit`                    | ✅    |
+| Create config file                     | `.pre-commit-config.yaml`                        | ✅    |
+| Install Git hook                       | `pre-commit install`                             | ✅    |
+| Run on all files (optional)            | `pre-commit run --all-files`                     | ✅    |
+| Install `pipx`                         | `sudo apt install pipx && pipx ensurepath`       | ✅    |
+| Install `detect-secrets` safely        | `pipx install detect-secrets`                    | ✅    |
+| Create `.secrets.baseline`             | `detect-secrets scan > .secrets.baseline`        | ✅    |
+| (Optional) Audit baseline              | `detect-secrets audit .secrets.baseline`         | ✅    |
+| Commit config and baseline             | `git add` and `git commit`                       | ✅    |
+
+---

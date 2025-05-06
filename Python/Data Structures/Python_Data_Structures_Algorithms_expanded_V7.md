@@ -74,7 +74,7 @@
 
         # Regular Implementation
         arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-        sorted_arr = quick_sort(arr) 
+        sorted_arr = quick_sort(arr)
         print(sorted_arr)  # Output: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         # Best Practices Implementation: Using a cached version for repeated sorting
@@ -119,7 +119,7 @@
             left = merge_sort(arr[:mid])
             right = merge_sort(arr[mid:])
             return merge(left, right)
-        
+
         def merge(left, right):
             result = []
             i = j = 0
@@ -304,9 +304,9 @@
       print(squares)  # Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
       ```
     </details>
-  
+
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: threading 
+    - **Packages to Import**: threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -375,7 +375,7 @@
       print(coordinates)  # Output: (10, 20)
       ```
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: threading 
+    - **Packages to Import**: threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -403,7 +403,7 @@
       ```
     </details>
 
-    
+
 ### 1.3 Dictionaries
 - **Usage**: Key-value pairs, efficient lookup, insertion, and deletion.
 - **Common Algorithms**:
@@ -450,7 +450,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: threading 
+    - **Packages to Import**: threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -539,7 +539,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: threading 
+    - **Packages to Import**: threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -696,7 +696,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: collections, threading 
+    - **Packages to Import**: collections, threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -787,7 +787,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: collections, threading 
+    - **Packages to Import**: collections, threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -878,7 +878,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: collections, threading 
+    - **Packages to Import**: collections, threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -971,7 +971,7 @@
               return []
           if k > n:
               raise ValueError("Window size k cannot be greater than the array size.")
-          
+
           dq = deque()  # To store indices of elements
           result = []
 
@@ -1011,7 +1011,7 @@
         def sum_of_subarray(array, k):
             if k > len(array):
                 raise ValueError("Window size k cannot be larger than the array size.")
-            
+
             result = []
             window_sum = sum(array[:k])  # Initial window sum
             result.append(window_sum)
@@ -1028,7 +1028,7 @@
         print("Sum of Subarray:", sum_of_subarray(array, k)) # Sum of Subarray: [6, 9, 12]
 
       ```
-    </details> 
+    </details>
     <details>
       <summary>sum_of_subarray with deque</summary>
 
@@ -1038,7 +1038,7 @@
       def sum_of_subarray_with_deque(array, k):
           if k > len(array):
               raise ValueError("Window size k cannot be larger than the array size.")
-          
+
           result = []
           window_sum = 0
           dq = deque()
@@ -1050,7 +1050,7 @@
               # Maintain the size of the deque
               if len(dq) > k:
                   window_sum -= dq.popleft()
-              
+
               if len(dq) == k:
                   result.append(window_sum)
 
@@ -1062,7 +1062,7 @@
       print("Sum of Subarray with Deque:", sum_of_subarray_with_deque(array, k))  # Sum of Subarray with Deque: [6, 9, 12]
 
       ```
-    </details>    
+    </details>
 
   - **Longest Substring Without Repeating Characters**: Find the length of the longest substring without repeating characters using a sliding window. O(n) time complexity, O(k) space complexity.
     - **Best Practices**: Use for problems involving a moving window of elements.
@@ -1091,7 +1091,7 @@
       print("Longest Substring Without Repeating Characters:", longest_substring_without_repeating(s)) # Longest Substring Without Repeating Characters: 3
 
       ```
-    </details> 
+    </details>
     <details>
       <summary>longest_substring_without_repeating with deque</summary>
 
@@ -1117,7 +1117,7 @@
       print("Longest Substring Without Repeating Characters (Deque):", longest_substring_without_repeating_deque(s)) # Longest Substring Without Repeating Characters (Deque): 3
 
       ```
-    </details>    
+    </details>
 
   - **Subarray with a Specific Condition (Sum ≥ Target)**: Find the length of the smallest subarray with a sum greater than or equal to the target using a sliding window. O(n) time complexity, O(k) space complexity.
     - **Best Practices**: Use for problems involving a moving window of elements.
@@ -1149,7 +1149,7 @@
       print("Minimum Subarray Length with Sum ≥ Target:", min_subarray_length_with_sum(array, target))
 
       ```
-    </details> 
+    </details>
     <details>
       <summary>min_subarray_length_with_sum with deque</summary>
 
@@ -1175,13 +1175,13 @@
       print("Minimum Subarray Length with Sum ≥ Target (Deque):", min_subarray_length_with_sum_deque(array, target))
 
       ```
-    </details>    
+    </details>
 
 
 
   - **Best Practices**: Use `deque` for queue-like operations to avoid O(n) operations of lists.
     - **Packages to Import**: `from collections import deque`
-    - **Efficiency**: 
+    - **Efficiency**:
          Key Advantages of Using deque - Efficient Sliding Window Updates:
          - deque.popleft() is 𝑂(1) which is faster than shifting all elements in a list.
          - Ideal for scenarios where the window frequently updates by adding/removing elements.
@@ -1198,10 +1198,10 @@
       dq.append(4)
       print(dq)  # Output: deque([0, 1, 2, 3, 4])
       ```
-    </details>    
+    </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: collections, threading 
+    - **Packages to Import**: collections, threading
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -1281,7 +1281,7 @@
     </details>
 
   - **Thread-Safe Implementation**: Using threading.Lock
-    - **Packages to Import**: from multiprocessing import Array, Process 
+    - **Packages to Import**: from multiprocessing import Array, Process
     <details>
       <summary>Thread-Safe Implementation Example</summary>
 
@@ -1464,10 +1464,10 @@
       ```python
       # Define a dictionary with 1,000,000 'name' entries all set to 'Alice' and 'age' entries all set to 25
       data = {'name': ['Alice']*1000000, 'age': [25]*1000000}
-      
+
       # Create a DataFrame from the dictionary
       df = pd.DataFrame(data)
-      
+
       # Group by the 'age' column and count the size of each group
       grouped = df.groupby('age').size()
 
@@ -2350,7 +2350,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0
@@ -2729,7 +2729,7 @@
         left = merge_sort(arr[:mid])
         right = merge_sort(arr[mid:])
         return merge(left, right)
-    
+
     def merge(left, right):
         result = []
         i = j = 0

@@ -5,18 +5,20 @@ from selenium.webdriver.chrome.options import Options
 
 # Set up Chrome options
 chrome_options = Options()
-chrome_options.add_argument('--headless')  # Run in headless mode
-chrome_options.add_argument('--disable-gpu')  # Disable GPU rendering
-chrome_options.add_argument('--no-sandbox')  # Bypass OS security model
-chrome_options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource problems
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--disable-gpu")  # Disable GPU rendering
+chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+chrome_options.add_argument(
+    "--disable-dev-shm-usage"
+)  # Overcome limited resource problems
 
 # Add additional arguments to suppress warnings
-chrome_options.add_argument('--log-level=3')  # Suppress logs
-chrome_options.add_argument('--disable-extensions')
-chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.add_argument('--disable-popup-blocking')
-chrome_options.add_argument('--disable-notifications')
-chrome_options.add_argument('--disable-infobars')
+chrome_options.add_argument("--log-level=3")  # Suppress logs
+chrome_options.add_argument("--disable-extensions")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-popup-blocking")
+chrome_options.add_argument("--disable-notifications")
+chrome_options.add_argument("--disable-infobars")
 
 # Path to your downloaded ChromeDriver
 chrome_driver_path = r"C:\Naftaly\WorkMaterials\automation-best-practices\Selenium\selenium-drivers\win\chromedriver-win64\chromedriver.exe"
@@ -40,7 +42,6 @@ print("Submitted the search form")
 # Close the browser
 driver.quit()
 print("Closed the browser")
-
 
 
 """

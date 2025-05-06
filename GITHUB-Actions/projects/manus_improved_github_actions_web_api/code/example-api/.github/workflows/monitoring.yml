@@ -9,7 +9,7 @@ jobs:
   health_check:
     name: API Health Check
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Check API health endpoint
         id: health_check
@@ -17,7 +17,7 @@ jobs:
           # In a real scenario, this would be the actual API URL
           API_URL="${{ secrets.API_URL || 'http://localhost:3000' }}/health"
           echo "Checking health at $API_URL"
-          
+
           # Simulate health check for demonstration
           # In production, this would be a real HTTP request
           RESPONSE_CODE=200
@@ -29,7 +29,7 @@ jobs:
             echo "status=unhealthy" >> $GITHUB_OUTPUT
             exit 1
           fi
-      
+
       - name: Check API detailed health
         if: steps.health_check.outputs.status == 'healthy'
         run: |
@@ -39,7 +39,7 @@ jobs:
           echo "Memory usage: OK"
           echo "CPU usage: OK"
           echo "Database connection: OK"
-      
+
       - name: Record metrics
         run: |
           # In a real scenario, this would record metrics to a monitoring system
@@ -47,7 +47,7 @@ jobs:
           echo "Timestamp: $(date)"
           echo "Status: ${{ steps.health_check.outputs.status }}"
           echo "Response time: 45ms"
-      
+
       - name: Notify on failure
         if: failure()
         run: |
@@ -59,23 +59,23 @@ jobs:
     name: API Performance Check
     runs-on: ubuntu-latest
     needs: health_check
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-      
+
       - name: Install k6
         run: |
           sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
           echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
           sudo apt-get update
           sudo apt-get install k6
-      
+
       - name: Create performance test script
         run: |
           cat > performance-test.js << 'EOF'
@@ -85,37 +85,37 @@ jobs:
           export default function() {
             // In a real scenario, this would be the actual API URL
             const baseUrl = __ENV.API_URL || 'http://localhost:3000';
-            
+
             // Test the health endpoint
             let healthRes = http.get(`${baseUrl}/health`);
             check(healthRes, {
               'health status is 200': (r) => r.status === 200,
               'health response time < 200ms': (r) => r.timings.duration < 200
             });
-            
+
             // Test the products endpoint
             let productsRes = http.get(`${baseUrl}/api/products`);
             check(productsRes, {
               'products status is 200': (r) => r.status === 200,
               'products response time < 500ms': (r) => r.timings.duration < 500
             });
-            
+
             sleep(1);
           }
           EOF
-      
+
       - name: Run performance test
         run: |
           echo "Running performance test..."
           # In a real scenario, this would run against the actual API
           # k6 run performance-test.js -e API_URL=${{ secrets.API_URL }}
-          
+
           # For demonstration, we'll simulate the results
           echo "Performance test results:"
           echo "Health endpoint: 45ms average response time"
           echo "Products endpoint: 120ms average response time"
           echo "All checks passed!"
-      
+
       - name: Record performance metrics
         run: |
           # In a real scenario, this would record metrics to a monitoring system
@@ -124,7 +124,7 @@ jobs:
           echo "Average response time: 82.5ms"
           echo "Requests per second: 250"
           echo "Error rate: 0%"
-      
+
       - name: Notify on performance degradation
         if: failure()
         run: |
@@ -138,34 +138,34 @@ jobs:
     needs: health_check
     # Run security scan weekly instead of every 15 minutes
     if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 0 * * 0'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Run OWASP ZAP scan
         run: |
           echo "Running OWASP ZAP security scan..."
           # In a real scenario, this would run a ZAP scan against the API
           # docker run --rm owasp/zap2docker-stable zap-baseline.py -t ${{ secrets.API_URL }}
-          
+
           # For demonstration, we'll simulate the results
           echo "Security scan results:"
           echo "No critical vulnerabilities found"
           echo "1 medium risk vulnerability found (simulated)"
           echo "3 low risk vulnerabilities found (simulated)"
-      
+
       - name: Check for dependency vulnerabilities
         run: |
           echo "Checking for dependency vulnerabilities..."
           # In a real scenario, this would use a tool like Snyk or npm audit
           # npm audit --production
-          
+
           # For demonstration, we'll simulate the results
           echo "Dependency check results:"
           echo "No critical vulnerabilities found"
           echo "2 moderate vulnerabilities found (simulated)"
-      
+
       - name: Generate security report
         run: |
           # In a real scenario, this would generate a detailed security report
@@ -178,13 +178,13 @@ jobs:
           echo "- 1 medium risk vulnerability (simulated)" >> reports/security-report.md
           echo "- 3 low risk vulnerabilities (simulated)" >> reports/security-report.md
           echo "- 2 moderate dependency vulnerabilities (simulated)" >> reports/security-report.md
-      
+
       - name: Upload security report
         uses: actions/upload-artifact@v3
         with:
           name: security-report
           path: reports/security-report.md
-      
+
       - name: Notify on security issues
         if: failure()
         run: |

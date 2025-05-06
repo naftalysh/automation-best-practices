@@ -11,7 +11,7 @@ def quick_sort(arr):
 
 # Regular Implementation
 arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-sorted_arr = quick_sort(arr) 
+sorted_arr = quick_sort(arr)
 print(sorted_arr)  # Output: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 # Best Practices Implementation: Using a cached version for repeated sorting
@@ -1895,5 +1895,3 @@ def quick_sort_cached(arr):
 
 arr = tuple([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
 sorted_arr = quick_sort_cached(arr)
-
-

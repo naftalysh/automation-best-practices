@@ -174,7 +174,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       # Setup
       - name: Setup environment
         uses: actions/setup-node@v3
@@ -182,11 +182,11 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm ci
-      
+
       # Execution
       - name: Run tests
         run: npm test
-      
+
       # Reporting
       - name: Generate test report
         run: npm run test:report
@@ -195,7 +195,7 @@ jobs:
         with:
           name: test-results
           path: test-results/
-      
+
       # Notification
       - name: Notify on failure
         if: failure()

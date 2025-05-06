@@ -19,20 +19,20 @@ jobs:
   check_dependencies:
     name: Check for Dependency Updates
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Check for outdated dependencies
         id: outdated
         run: |
@@ -46,7 +46,7 @@ jobs:
             echo "outdated=false" >> $GITHUB_OUTPUT
             echo "All dependencies are up to date!"
           fi
-      
+
       - name: Check for security vulnerabilities
         id: audit
         run: |
@@ -60,7 +60,7 @@ jobs:
             echo "vulnerable=false" >> $GITHUB_OUTPUT
             echo "No security vulnerabilities found!"
           fi
-      
+
       - name: Upload dependency reports
         uses: actions/upload-artifact@v3
         with:
@@ -74,25 +74,25 @@ jobs:
     needs: check_dependencies
     runs-on: ubuntu-latest
     if: needs.check_dependencies.outputs.outdated == 'true' || needs.check_dependencies.outputs.vulnerable == 'true'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Update dependencies
         run: |
           echo "Updating dependencies..."
           UPDATE_TYPE="${{ github.event.inputs.update-type || 'minor' }}"
-          
+
           if [ "$UPDATE_TYPE" = "patch" ]; then
             echo "Updating patch versions only"
             npm update
@@ -105,10 +105,10 @@ jobs:
             npx npm-check-updates -u
             npm install
           fi
-      
+
       - name: Run tests with updated dependencies
         run: npm test
-      
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
@@ -117,13 +117,13 @@ jobs:
           title: "Update Dependencies"
           body: |
             This PR updates project dependencies.
-            
+
             Update type: ${{ github.event.inputs.update-type || 'minor' }}
-            
+
             Automated changes by [Dependency Management Workflow](https://github.com/${{ github.repository }}/actions/workflows/dependency-management.yml)
           branch: dependency-updates
           base: develop
-      
+
       - name: Report dependency update status
         run: |
           echo "Dependency update completed!"

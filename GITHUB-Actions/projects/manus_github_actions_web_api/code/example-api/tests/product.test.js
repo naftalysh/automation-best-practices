@@ -52,7 +52,7 @@ describe('Product API', () => {
       ]);
 
       const res = await request(app).get('/api/products');
-      
+
       expect(res.statusCode).toEqual(200);
       expect(res.body.success).toBe(true);
       expect(res.body.count).toEqual(2);
@@ -73,7 +73,7 @@ describe('Product API', () => {
       });
 
       const res = await request(app).get(`/api/products/${product._id}`);
-      
+
       expect(res.statusCode).toEqual(200);
       expect(res.body.success).toBe(true);
       expect(res.body.data._id).toBe(product._id.toString());
@@ -83,7 +83,7 @@ describe('Product API', () => {
     it('should return 404 if product not found', async () => {
       const nonExistentId = new mongoose.Types.ObjectId();
       const res = await request(app).get(`/api/products/${nonExistentId}`);
-      
+
       expect(res.statusCode).toEqual(404);
       expect(res.body.success).toBe(false);
       expect(res.body.error).toBe('Product not found');
@@ -103,12 +103,12 @@ describe('Product API', () => {
       const res = await request(app)
         .post('/api/products')
         .send(productData);
-      
+
       expect(res.statusCode).toEqual(201);
       expect(res.body.success).toBe(true);
       expect(res.body.data.name).toBe('New Product');
       expect(res.body.data.price).toBe(79.99);
-      
+
       // Verify product was saved to database
       const savedProduct = await Product.findById(res.body.data._id);
       expect(savedProduct).not.toBeNull();
@@ -124,7 +124,7 @@ describe('Product API', () => {
       const res = await request(app)
         .post('/api/products')
         .send(invalidProductData);
-      
+
       expect(res.statusCode).toEqual(400);
       expect(res.body.success).toBe(false);
     });
@@ -149,13 +149,13 @@ describe('Product API', () => {
       const res = await request(app)
         .put(`/api/products/${product._id}`)
         .send(updateData);
-      
+
       expect(res.statusCode).toEqual(200);
       expect(res.body.success).toBe(true);
       expect(res.body.data.name).toBe('Updated Product');
       expect(res.body.data.price).toBe(129.99);
       expect(res.body.data.description).toBe('Test Description'); // Unchanged field
-      
+
       // Verify product was updated in database
       const updatedProduct = await Product.findById(product._id);
       expect(updatedProduct.name).toBe('Updated Product');
@@ -165,11 +165,11 @@ describe('Product API', () => {
     it('should return 404 if product not found', async () => {
       const nonExistentId = new mongoose.Types.ObjectId();
       const updateData = { name: 'Updated Product' };
-      
+
       const res = await request(app)
         .put(`/api/products/${nonExistentId}`)
         .send(updateData);
-      
+
       expect(res.statusCode).toEqual(404);
       expect(res.body.success).toBe(false);
       expect(res.body.error).toBe('Product not found');
@@ -188,10 +188,10 @@ describe('Product API', () => {
       });
 
       const res = await request(app).delete(`/api/products/${product._id}`);
-      
+
       expect(res.statusCode).toEqual(200);
       expect(res.body.success).toBe(true);
-      
+
       // Verify product was deleted from database
       const deletedProduct = await Product.findById(product._id);
       expect(deletedProduct).toBeNull();
@@ -199,9 +199,9 @@ describe('Product API', () => {
 
     it('should return 404 if product not found', async () => {
       const nonExistentId = new mongoose.Types.ObjectId();
-      
+
       const res = await request(app).delete(`/api/products/${nonExistentId}`);
-      
+
       expect(res.statusCode).toEqual(404);
       expect(res.body.success).toBe(false);
       expect(res.body.error).toBe('Product not found');

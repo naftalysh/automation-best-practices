@@ -12,23 +12,23 @@ jobs:
   generate_openapi_docs:
     name: Generate OpenAPI Documentation
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Create OpenAPI directory
         run: mkdir -p api-docs/openapi
-      
+
       - name: Generate OpenAPI specification
         run: |
           echo "Generating OpenAPI specification..."
@@ -135,14 +135,14 @@ jobs:
                     default: true
           EOF
           echo "OpenAPI specification generated successfully!"
-      
+
       - name: Validate OpenAPI specification
         run: |
           echo "Validating OpenAPI specification..."
           # In a real scenario, this would use a tool like openapi-validator
           # For demonstration, we'll simulate validation
           echo "OpenAPI specification is valid!"
-      
+
       - name: Generate API documentation
         run: |
           echo "Generating API documentation from OpenAPI specification..."
@@ -176,13 +176,13 @@ jobs:
           </html>
           EOF
           echo "API documentation generated successfully!"
-      
+
       - name: Upload documentation artifacts
         uses: actions/upload-artifact@v3
         with:
           name: api-documentation
           path: api-docs/
-      
+
       - name: Deploy documentation to GitHub Pages
         if: github.ref == 'refs/heads/main'
         run: |
