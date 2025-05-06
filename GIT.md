@@ -843,3 +843,137 @@ If anything fails, the commit is **blocked**.
 | Commit config and baseline             | `git add` and `git commit`                       | ✅    |
 
 ---
+# Resolving "Large File" Push Errors to GitHub with Git LFS on WSL
+
+This document outlines the problem of encountering push errors to GitHub due to large files and provides a step-by-step solution using Git Large File Storage (LFS), including installation on WSL (Windows Subsystem for Linux) and rewriting history for existing large files.
+
+## The Problem: GitHub File Size Limits
+
+When attempting to push commits to a GitHub repository, you might encounter an error similar to this:
+
+```
+remote: error: File path/to/your/largefile.dat is 150.00 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+! [remote rejected] your-branch -> your-branch (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/your-username/your-repository.git'
+```
+
+This error occurs because GitHub imposes a strict limit on the size of individual files that can be directly stored in a Git repository (typically 100MB). Even if a large file was added in a past commit and subsequently "removed" or added to `.gitignore`, its presence in the Git history will still cause the push to be rejected if that history is being sent to the remote.
+
+## The Solution: Git Large File Storage (LFS)
+
+Git LFS is an extension that replaces large files in your Git repository with small text pointers. The actual large file content is stored on a separate LFS server (like the one provided by GitHub). This keeps your Git repository small and performant while still versioning your large assets.
+
+### Step 1: Install Git LFS on WSL (Ubuntu/Debian Example)
+
+If you're working within a WSL environment (e.g., Ubuntu), you need to install Git LFS there.
+
+1.  **Open your WSL terminal.**
+
+2.  **Add the PackageCloud repository for Git LFS:**
+    This repository provides the latest versions of Git LFS.
+    ```bash
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    ```
+
+3.  **Install Git LFS:**
+    Use `apt-get` to install the package.
+    ```bash
+    sudo apt-get install git-lfs
+    ```
+
+4.  **Verify the installation (optional but recommended):**
+    ```bash
+    git lfs --version
+    ```
+    You should see output like `git-lfs/x.y.z (GitHub; linux amd64; go a.b.c)`.
+
+5.  **Initialize Git LFS for your user account (run once per user):**
+    This command installs global Git LFS hooks.
+    ```bash
+    git lfs install
+    ```
+    Output: `Git LFS initialized.`
+
+### Step 2: Navigate to Your Repository
+
+Ensure you are in the root directory of your local Git repository within your WSL terminal.
+
+```bash
+cd /path/to/your/repository
+# Example: cd /mnt/c/Users/YourUser/Projects/my-project
+```
+
+### Step 3: Initialize Git LFS for the Repository
+
+Even if you ran `git lfs install` globally, you might need to initialize it for the specific repository if it wasn't done before or if you cloned a fresh copy. This ensures the local repository hooks are set up.
+
+```bash
+git lfs install
+```
+Output: `Git LFS initialized.` (It might also say it's already initialized, which is fine).
+
+### Step 4: Track the Large File(s)
+
+You need to tell Git LFS which files (or file patterns) it should manage.
+
+*   **Identify the large file:** In our example error, it was `Selenium/selenium-drivers/linux/chrome-linux64/chrome`.
+*   **Track the file:**
+    ```bash
+    git lfs track "Selenium/selenium-drivers/linux/chrome-linux64/chrome"
+    ```
+    You can also use patterns, e.g., `git lfs track "*.psd"` to track all Photoshop files.
+
+    This command creates or updates a file named `.gitattributes` in your repository. This file tells Git how to handle files matching the specified patterns.
+
+*   **Important Note on `.gitignore`:** If the large file was previously listed in your `.gitignore` file, you must remove or comment out that line. Git LFS can only track files that Git itself is aware of. If Git is ignoring the file, LFS won't manage it.
+
+### Step 5: Stage the `.gitattributes` File
+
+Add the `.gitattributes` file to your Git staging area.
+
+```bash
+git add .gitattributes
+```
+If you also modified `.gitignore` (to stop ignoring the large file), add it as well:
+```bash
+git add .gitignore .gitattributes
+```
+
+### Step 6: Migrate Existing Large Files in History
+
+If the large file was already committed to your repository's history (which is why the push is failing), simply tracking it for future commits isn't enough. You need to rewrite your repository's history to convert the existing large file objects into LFS pointers.
+
+**Caution:** Rewriting history changes commit SHAs. If you are collaborating with others, ensure they are aware and coordinate this process. Back up your repository before proceeding.
+
+```bash
+git lfs migrate import --everything --include="Selenium/selenium-drivers/linux/chrome-linux64/chrome"
+```
+*   `migrate import`: The command to rewrite history for LFS.
+*   `--everything`: Instructs LFS to rewrite all local branches and tags. If you only want to rewrite the current branch and its ancestors, you might omit this or use more specific options, but `--everything` is common for a full cleanup.
+*   `--include="path/to/your/largefile.ext"`: Specifies the exact file(s) to convert. You can use comma-separated paths or patterns if converting multiple files/types.
+
+This process can take some time depending on the repository size and history depth.
+
+### Step 7: Push the Rewritten History to the Remote
+
+After the migration, your local history has been changed. To update the remote repository (e.g., GitHub), you will need to perform a "force push." It's generally safer to use `--force-with-lease` than a plain `--force` as it helps prevent accidentally overwriting work if the remote branch has new commits you haven't fetched.
+
+```bash
+git push --force-with-lease origin your-target-branch
+```
+*   Replace `your-target-branch` with the name of the branch you are trying to push (e.g., `main`, `develop`, `updates`).
+*   Replace `origin` with your remote's name if it's different.
+
+If `--force-with-lease` still gives issues (e.g., if the remote truly diverged in an unexpected way and you are certain your local version is correct), you might fall back to `git push --force origin your-target-branch`, but understand the risks.
+
+### Step 8: Verification
+
+After the push, check your GitHub repository.
+*   The large file should now appear as an LFS pointer (a small text file) when you browse the repository.
+*   The actual file content can be downloaded by clicking on it.
+*   Your repository size (as reported by GitHub) should be smaller.
+
+---
+
+By following these steps, you can effectively manage large files in your Git repository using Git LFS and resolve push errors related to file size limits on platforms like GitHub.
